@@ -1,0 +1,19 @@
+.notFound {
+  display: flex;
+  align-items: center;
+  margin: 40px auto;
+  flex-direction: column;
+  width: 80%;
+  &-header {
+    font-size: 52px;
+  }
+  &-description {
+    font-size: 32px;
+    text-align: center;
+    margin: 10px;
+  }
+  &-link {
+    display: inline;
+    color: red;
+  }
+}

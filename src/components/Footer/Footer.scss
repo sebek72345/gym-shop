@@ -1,0 +1,29 @@
+.footer-wrapper {
+  background-color: rgb(52, 58, 64);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  .footer {
+    width: 80%;
+    font-size: 16px;
+    &-links {
+      display: flex;
+      padding-bottom: 32px;
+      border-bottom: 2px solid #ddd;
+      li {
+        list-style: none;
+        color: #ddd;
+        margin: 0 10px;
+        &:hover {
+          color: rgb(192, 187, 187);
+        }
+      }
+    }
+    &-copyright {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+      color: #ddd;
+    }
+  }
+}

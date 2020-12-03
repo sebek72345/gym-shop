@@ -1,0 +1,55 @@
+.header {
+  height: 100px;
+  background-color: #f8f9fa;
+  .header-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo-container {
+      flex-grow: 0;
+      width: 100px;
+      height: 100px;
+      .logo {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .header-left {
+      margin-left: 400px;
+      flex-grow: 6;
+      display: flex;
+      justify-content: space-around;
+      .contact-wrapper {
+        height: 100px;
+        width: 200px;
+      }
+      .contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .contact-phone,
+        .contact-email {
+          display: flex;
+          line-height: 24px;
+        }
+        .contact-phone > p,
+        .contact-email > p {
+          margin-left: 10px;
+        }
+      }
+
+      .header-login {
+        display: flex;
+        align-items: center;
+        height: 20px;
+        margin: auto 0;
+        &:hover {
+          color: #ddd;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.hero {
+  background-image: url("../../../assets//hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 600px;
+  position: relative;
+  margin-left: -152px;
+  margin-right: -67px;
+  &-desc {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 600px;
+    text-shadow: 2px 2px #8d8d8d;
+    &-h2 {
+      font-size: 52px;
+      color: white;
+
+      padding-bottom: 20px;
+    }
+    &-h5 {
+      font-size: 24px;
+      color: white;
+    }
+  }
+}

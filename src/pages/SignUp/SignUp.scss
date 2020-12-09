@@ -1,0 +1,42 @@
+.register-wrapper {
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+
+  min-height: 300px;
+  .register {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 50px;
+
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 10px;
+    margin-right: 20px;
+    .password-wrapper {
+      position: relative;
+    }
+
+    &-outerLink {
+      text-align: center;
+      color: deepskyblue;
+      width: 20%;
+      margin: 10px auto;
+    }
+    &-eye {
+      position: absolute;
+      top: 30%;
+      right: 5%;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .register-image-wrapper {
+    max-width: 50%;
+    .register-image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

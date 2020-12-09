@@ -1,16 +1,20 @@
 .header {
   height: 100px;
   background-color: #f8f9fa;
-  .header-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  &-container {
     width: 80%;
+    height: 80px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     .logo-container {
       flex-grow: 0;
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       .logo {
         width: 100%;
         height: 100%;
@@ -41,13 +45,61 @@
         }
       }
 
-      .header-login {
+      .header-login,
+      .header-signup {
         display: flex;
         align-items: center;
         height: 20px;
         margin: auto 0;
         &:hover {
           color: #ddd;
+        }
+      }
+    }
+  }
+  .assortment {
+    background-color: #343a40;
+    padding: 15px;
+    &-list {
+      display: flex;
+      justify-content: space-around;
+      text-transform: uppercase;
+      li {
+        list-style: none;
+
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0 15px;
+        cursor: pointer;
+        a {
+          color: rgb(134, 134, 134);
+          border-bottom: none;
+          transition: all 0.3s;
+          position: relative;
+          &::after {
+            bottom: -2px;
+            content: "";
+            display: block;
+            height: 2px;
+            left: 50%;
+            position: absolute;
+            background: #ffffff;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+          }
+          &:hover {
+            text-decoration: none;
+            color: #ffffff;
+          }
+          &:hover:after {
+            width: 100%;
+            left: 0;
+          }
+        }
+        .active-link {
+          color: white;
+          border-bottom: 2px solid white;
         }
       }
     }

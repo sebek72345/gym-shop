@@ -16,7 +16,7 @@ export default function NotFound() {
         <p className="notFound-link"> {location}</p> website.
         <br /> If you want to go back, click button below
       </h2>
-      <Button name="Go Back" goBack={() => history.goBack()} />
+      <Button name="Go Back" action={() => history.goBack()} />
     </div>
   );
 }

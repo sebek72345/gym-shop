@@ -1,8 +1,46 @@
-.contact {
-  width: 80%;
-  display: flex;
-  margin: 20px auto;
-  &-envelop {
-    width: 20%;
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+.contact-wrapper {
+  .contact {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px auto;
+    &-envelope {
+      width: 30%;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      &-error {
+        color: red;
+      }
+      & > input {
+        min-width: 400px;
+        height: 30px;
+        padding: 12px;
+        border-radius: 5px;
+      }
+      & > label {
+        font-family: "Oswald", sans-serif;
+        margin-top: 16px;
+      }
+    }
+
+    textarea {
+      height: 100px;
+      padding: 12px;
+      border-radius: 5px;
+
+      resize: none;
+    }
+    .envelope-pic {
+      width: 100%;
+      height: 100%;
+    }
   }
+}
+.contact-description {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 36px;
 }

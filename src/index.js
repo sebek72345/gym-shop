@@ -2,13 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import ProductsProvider from "./context";
 import { BrowserRouter as Router } from "react-router-dom";
 ReactDOM.render(
-  <React.StrictMode>
+  <ProductsProvider>
     <Router>
       <App />
     </Router>
-  </React.StrictMode>,
+  </ProductsProvider>,
   document.getElementById("root")
 );
 

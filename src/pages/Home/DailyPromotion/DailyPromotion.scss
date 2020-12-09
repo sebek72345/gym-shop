@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+.daily-promotion {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  padding: 30px;
+  margin: 20px;
+  box-shadow: 0px 0px 10px 3px #d3d2d2;
+  font-family: "Nunito", sans-serif;
+  &-timer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h3 {
+      font-size: 26px;
+    }
+  }
+  &-pic {
+    margin: -20px;
+    width: 250px;
+    &-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    &-button-wrapper {
+      position: relative;
+
+      &-arrow {
+        position: absolute;
+        top: 10px;
+        left: 160px;
+      }
+    }
+
+    h5 {
+      margin: 10px 0;
+    }
+    &-price {
+      &-actual {
+        position: relative;
+        margin-right: 12px;
+        span {
+          position: absolute;
+          top: 5px;
+          font-weight: 400;
+          left: 56%;
+          font-size: 18 px;
+          text-decoration: line-through;
+          color: #b4b4b4;
+        }
+      }
+    }
+  }
+  &-button-wrapper {
+    margin-top: 20px;
+    position: relative;
+    &:hover button,
+    &:hover .daily-promotion-button-arrow {
+      background-color: #f1f1f1;
+      transform: translateY(-5px);
+      box-shadow: 5px 5px 4px 1px #f1f1f1;
+    }
+    button {
+      border: 1px solid #d1d1d1;
+      border-radius: 5px;
+      box-shadow: 2px 2px #d3d2d2;
+      background-color: #fff;
+      width: 200px;
+      height: 40px;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    .daily-promotion-button-arrow {
+      position: absolute;
+      top: 10px;
+      left: 65%;
+      transition: 0.4s;
+    }
+  }
+}

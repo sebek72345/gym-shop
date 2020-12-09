@@ -6,6 +6,8 @@ const StyledButton = styled.button`
   border: 1px solid #110404;
   border-radius: 5px;
   padding: 10px 30px;
+  margin-top: 15px;
+  width: auto;
   cursor: pointer;
   transition: 0.4s;
   &:hover {
@@ -15,6 +17,10 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ name, goBack }) {
-  return <StyledButton onClick={goBack}>{name}</StyledButton>;
+export default function Button({ name, action, type, icon }) {
+  return (
+    <StyledButton type={type} onClick={action}>
+      {name}
+    </StyledButton>
+  );
 }

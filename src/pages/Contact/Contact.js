@@ -1,39 +1,104 @@
 import React from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./Contact.scss";
 import envelopIcon from "../../assets/envelope.png";
+import Button from "../../components/Button/Button";
+import emailjs from "emailjs-com";
+import * as yup from "yup";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 export default function Contact() {
   return (
-    <div className="contact">
-      <div className="contact-envelop">
-        <img src={envelopIcon} alt="envelop" className="" />
+    <>
+      <h2 className="contact-description">
+        If you have any questions, feel free to contact us.
+      </h2>
+      <div className="contact-wrapper">
+        <div className="contact">
+          <div className="contact-envelope">
+            <img src={envelopIcon} alt="envelope" className="envelope-pic" />
+          </div>
+          <Formik
+            initialValues={{
+              name: "",
+              email: "",
+              message: "",
+            }}
+            onSubmit={(values) => {
+              const templateParams = {
+                name: values.name,
+                email: values.email,
+                content: values.message,
+              };
+
+              emailjs
+                .send(
+                  "service_qhiee3g",
+                  "template_4sb8qbr",
+                  templateParams,
+                  "user_rKSxubFxTbH8A7cKq1w1S"
+                )
+                .then((resp) => {
+                  NotificationManager.success(
+                    "Success message",
+                    "Message was send"
+                  );
+                  console.log(resp);
+                })
+                .catch((err) => {
+                  NotificationManager.error("Error message", err, 3000, () => {
+                    alert("callback");
+                  });
+                });
+            }}
+            validationSchema={yup.object().shape({
+              name: yup.string().required("Name is required"),
+              email: yup
+                .string()
+                .email("Put valid email")
+                .required("Email is required"),
+              message: yup.string().required("Text message is required"),
+            })}
+          >
+            {() => (
+              <Form className="form">
+                <label htmlFor="name">Your Name: </label>
+                <Field name="name" className="form-name" />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className="form-error"
+                />
+
+                <label htmlFor="email">Your Email: </label>
+                <Field name="email" className="form-email" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="form-error"
+                />
+
+                <label htmlFor="message">Message: </label>
+                <Field
+                  name="message"
+                  component="textarea"
+                  className="form-textarea"
+                />
+                <ErrorMessage
+                  name="message"
+                  component="div"
+                  className="form-error"
+                />
+                <Button className="form-submit" name="Send e-mail" />
+              </Form>
+            )}
+          </Formik>
+          <NotificationContainer timeOut={2000} />
+        </div>
       </div>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          message: "",
-        }}
-        onSubmit={(values, actions) => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }}
-      >
-        {() => (
-          <Form>
-            <label htmlFor="name">Name: </label>
-            <Field name="name" />
-
-            <label htmlFor="email">Email: </label>
-            <Field name="email" />
-
-            <label htmlFor="message">Message: </label>
-            <Field name="message" component="textarea" />
-
-            <button type="submit">Send</button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    </>
   );
 }

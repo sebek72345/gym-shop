@@ -1,0 +1,30 @@
+.filters-wrapper {
+  min-width: 200px;
+  height: 500px;
+  background-color: "red";
+  box-shadow: 4px 4px 4px 3px rgb(207, 207, 207);
+  border-radius: 5px;
+  padding: 26px 20px;
+  .filters-title {
+    font-size: 24px;
+    font-weight: 500;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgb(207, 207, 207);
+  }
+  .filters-subtitle {
+    font-size: 18px;
+    margin-top: 16px;
+  }
+  .filters-by-brand {
+    border-bottom: 1px solid rgb(207, 207, 207);
+    padding-bottom: 16px;
+  }
+  label {
+    display: block;
+    margin-top: 16px;
+    text-transform: uppercase;
+    input {
+      margin-right: 5px;
+    }
+  }
+}

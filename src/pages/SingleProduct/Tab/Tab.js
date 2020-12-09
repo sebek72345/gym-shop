@@ -72,7 +72,7 @@ export default function SimpleTabs({ product }) {
           <Tab label="Product Details" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0} component={"span"}>
         <DescriptionProduct details={product.details} />
       </TabPanel>
       <TabPanel value={value} index={1}>

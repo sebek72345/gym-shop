@@ -2,12 +2,11 @@ import React from "react";
 import Card from "./../../Card/Card";
 import "./ProductWrapper.scss";
 export default function ProductWrapper({ products }) {
-  console.log(products);
   return (
     <main className="product-container">
       <div className="sorting-container">
         <p className="category product-counter">
-          found {/* {products.length} */} products in this catergory
+          found {products.length} products in this catergory
         </p>
         <div className="sort-by">
           <span>Sort by:</span>

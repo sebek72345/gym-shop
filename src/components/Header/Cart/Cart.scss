@@ -4,6 +4,10 @@
   flex-direction: column;
   justify-content: center;
   transition: all 0.3s;
+  top: 10px;
+  right: 0;
+
+  max-height: 80px;
   .cart-name {
     text-align: center;
     margin-top: -5px;

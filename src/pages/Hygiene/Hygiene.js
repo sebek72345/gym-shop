@@ -4,7 +4,7 @@ import CategoryTitle from "../../components/accesoriesComponent/CategoryTitle/Ca
 import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
 export default function Mats(props) {
-  const [category, setCategory] = useState("mats");
+  const [category, setCategory] = useState("hygiene");
   const { productsCategory, getProductCategory, capitalize } = useContext(
     ProductContext
   );
@@ -15,6 +15,7 @@ export default function Mats(props) {
       }
     })();
   }, [category]);
+
   const categoryTitle = capitalize(props.match.path.slice(1));
   return (
     <div>

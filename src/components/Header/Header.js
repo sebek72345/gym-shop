@@ -35,11 +35,11 @@ export default function Header() {
             <address className="contact">
               <div className="contact-phone">
                 <EmailIcon />
-                <p>723 452 352</p>
+                <a href="tel:+48723452352">723 452 352</a>
               </div>
               <div className="contact-email">
                 <PhoneIcon />
-                <p>shop@best.com</p>
+                <a href="mailto:shop@best.com">shop@best.com</a>
               </div>
             </address>
           </div>

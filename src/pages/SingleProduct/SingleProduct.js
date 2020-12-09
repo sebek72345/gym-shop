@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { ProductContext } from "../../context";
 import Button from "../../components/Button/Button";
-import CartIcon from "../../assets/cartIcon.svg";
 import StoreIcon from "@material-ui/icons/Store";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
@@ -10,17 +9,19 @@ import TabPanel from "./Tab/Tab";
 import "./SingleProduct.scss";
 export default function SingleProduct(props) {
   const { getProduct } = useContext(ProductContext);
-  const product = getProduct(props.match.params.slug);
+  const titlePage = props.match.params.slug;
+  const product = getProduct(titlePage);
   const deliveryDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 2);
   const deliveryDateString = ` ${deliveryDate.getDate()}.${
     deliveryDate.getMonth() + 1
   }.${deliveryDate.getFullYear()}`;
-  let [quantityProduct, setQuantityProduct] = useState(5);
+  let [quantityProduct, setQuantityProduct] = useState(1);
 
   const handleSubmited = (e) => {
     e.preventDefault();
     console.log("Add to cart");
   };
+
   return (
     <div className="single-product-wrapper">
       {product ? (
@@ -53,7 +54,7 @@ export default function SingleProduct(props) {
                   quantity={quantityProduct}
                   setQuantity={setQuantityProduct}
                 />
-                <Button name="Add to cart" icon={CartIcon} type="submit" />
+                <Button name="Add to cart" type="submit" />
               </form>
             </div>
           </div>

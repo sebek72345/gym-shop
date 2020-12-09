@@ -1,0 +1,12 @@
+.cart-page-wrapper {
+  .cart-page-title {
+    font-size: 26px;
+  }
+  .products {
+    display: flex;
+    justify-content: space-between;
+    &-in-cart {
+      flex-grow: 1;
+    }
+  }
+}

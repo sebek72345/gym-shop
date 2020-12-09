@@ -1,5 +1,5 @@
 import React from "react";
 import "./CategoryTitle.scss";
-export default function CategoryTitle() {
-  return <h3 className="category-title">Mats</h3>;
+export default function CategoryTitle({ title }) {
+  return <h3 className="category-title">{title}</h3>;
 }

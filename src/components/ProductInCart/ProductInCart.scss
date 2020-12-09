@@ -1,0 +1,26 @@
+.summary-basket {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 3px 3px 6px 1px rgb(199, 199, 199);
+  border-radius: 15px;
+  padding: 6px;
+  margin-top: 16px;
+  .summary-image {
+    max-width: 100px;
+    max-height: 100px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .product-details {
+    display: flex;
+    flex-direction: column;
+  }
+  .product-action {
+    display: flex;
+    justify-content: space-between;
+    min-width: 100px;
+  }
+}

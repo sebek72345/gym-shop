@@ -1,0 +1,23 @@
+.summary-wrapper {
+  padding: 32px;
+  width: 400px;
+  #summary-title {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .summary-info {
+    margin: 20px 0;
+    .cost-products,
+    .total-cost {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+    .cost-products {
+      border-bottom: 0.5px solid rgb(238, 238, 238);
+    }
+    .total-cost {
+      border-top: 2px solid black;
+    }
+  }
+}

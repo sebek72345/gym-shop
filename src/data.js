@@ -9,6 +9,8 @@ export default [
     aviable: 10,
     featured: false,
     details: [],
+    inCart: false,
+    amountInCart: 1,
     description:
       "OVERVIEV Key Features of the Aeromat Elite Workout Mat with Eyelets: Great for any floor exercis Easy to clean with damp cloth Light weight, easy to roll up, with convenient carry handle",
     pics: [
@@ -26,6 +28,8 @@ export default [
     previousPrice: 45.99,
     aviable: 10,
     featured: false,
+    inCart: false,
+    amountInCart: 1,
     description:
       "The Aeromat Rollup Mat in black is ideal for any floor exercise. Designed with closed cell foam structure, this mat has superior cushioning and is body heat retentive. The non-absorbent surface makes it impervious to sweat and water. Velcro straps are included for easy transportation. Wipe clean with a damp cloth.",
     details: [
@@ -51,6 +55,8 @@ export default [
     previousPrice: 899.99,
     aviable: 5,
     featured: false,
+    inCart: false,
+    amountInCart: 1,
     description:
       "This space saving storage display allows for easy access to the essential fitness training products.",
     details: [
@@ -80,6 +86,8 @@ export default [
     previousPrice: 109.99,
     aviable: 5,
     featured: false,
+    inCart: false,
+    amountInCart: 1,
     description:
       "Effortlessly switch between standing and floor exercises with the medium thickness of this premium exercise mat. This mat gives you the perfect surface for Pilates, yoga and a variety of other fitness types. Depending on your preference and each movement, you can switch sides between the textured one and the smooth one of this dual-sided mat.",
     details: [
@@ -95,5 +103,225 @@ export default [
       "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/a/e/aero-r58-2372-blu_2.jpg",
     ],
     specification: [["MANUFACTURER", "Aeromats"]],
+  },
+  {
+    id: 5,
+    type: "hygiene",
+    name: "2XL Corp Gym Wipes Antibacterial Refill (case of 4 refill packs)",
+    slug: "Corp-Gym-Wipes-Antibacterial-Refill",
+    price: 155.88,
+    previousPrice: 209.99,
+    aviable: 7,
+    featured: true,
+    inCart: false,
+    amountInCart: 1,
+    description: "Key Features of the 2XL Corp Gym Wipes Antibacterial Refill:",
+    details: [
+      "2XL Corporation now provides EPA registered disinfectant wipes in a 700 count  refill pack (extra-thick, super-absorbent 8 x 6 towelette size) designed to sanitize surfaces.  Alcohol-free, bleach-free and phenol-free.  Gym Wipes Antibacterial Towelettes, are pre-moistened, disposable, surface disinfecting wipes, that have been developed to stop cross-contamination on surfaces.  Gym Wipes will sanitize surfaces and kill 99.9% of germs that can cause illness.",
+      "While working out, people often sweat, cough or sneeze, leaving behind germs that can spread the common cold, bacteria and many other types of illness.  Gym Wipes Antibacterial Towelettes are an easy and hygienic way to lower the risk of infection and cross contamination.",
+      "Gym Wipes Antibacterial Towelettes are proven to kill bacteria such as Salmonella choleraesuis, ATCC #10708, and E. coli, ATCC #11229.  The formulation begins to eliminate germs on contact, and once it has fully evaporated, the germ-killing action is complete.",
+      "Gym Wipes Antibacterial are perfect for controlling and eliminating organisms on high traffic surfaces that people come into contact with everyday.",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/2/x/2xl-wipes-anti-r.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	2XL Corp"],
+      ["Product Number ", "2XL-101"],
+    ],
+  },
+  {
+    id: 6,
+    type: "hygiene",
+    name: "The Cleaning Station Dry Towels",
+    slug: "The-Cleaning-Station-Dry-Towels",
+    price: 55.88,
+    previousPrice: 89.99,
+    aviable: 7,
+    featured: true,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "Key Features of The Cleaning Station Dry Towels: The Cleaning Station 2-Ply Dry Towel is the perfect companion to The Cleaning Station. This towel is economical and practical for a variety of uses. Protects against germs and viruses since consumers only touch the towel they’ll use. The Cleaning Station’s engineered nozzle provides reliable results, pull after pull. A great overall towel for keeping costs under control!",
+    details: [
+      "6 rolls per case",
+      "8” x 11” towel",
+      "660 towels per roll",
+      "Gym Wipes Antibacterial are perfect for controlling and eliminating organisms on high traffic surfaces that people come into contact with everyday.",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/e/s/essential_dry_towels.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	The Cleaning Station"],
+      ["Color ", "White"],
+    ],
+  },
+  {
+    id: 7,
+    type: "machine",
+    name: "Hampton Tricep Rope",
+    slug: "Hampton-Tricep -",
+    price: 55.88,
+    previousPrice: 85.49,
+    aviable: 12,
+    featured: false,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Hampton Triceps Press-Down Rope with double grips tones and strengthens the arms and upper body. It features ergonomic gel-grip urethane handles for maximum comfort. This rope is made of nylon construction, and is a perfect cable attachment for any home gym system.",
+    details: [
+      "Tones and strengthens the arms and upper body",
+      "Features ergonomic gel-grip urethane handles for maximum comfort",
+      "Made of nylon construction",
+      "Rope length: 28”",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/h/a/hampton-tricep-rope.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	Hampton Fitness"],
+      ["Weight ", "4 lbs"],
+    ],
+  },
+  {
+    id: 8,
+    type: "machine",
+    name: "Chrome Curl Bar",
+    slug: "Chrome-Curl-Bar",
+    price: 67.88,
+    previousPrice: 105.49,
+    aviable: 19,
+    featured: false,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Hampton 28” Revolving Chrome Curl Bar is designed to help you build muscle and tone your arms. The revolving bar features solid steel construction with a hard chrome finish. It also includes ergonomic gel-grip urethane handles, and is a perfect cable attachment for any home gym system.",
+    details: [
+      "The smooth revolving bar allows for maximum workout effectiveness",
+      "Includes Ergonomic Urethane Gel-Grip handles",
+      "Made of nylon construction",
+      "This Revolving Chrome Curl Bar is perfect for use with any home gym that has cable attachments",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/h/a/hampton-28-inch-chrome-curl-bar.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	Hampton Fitness"],
+      ["Demensions ", "W 3' L 28' H3'"],
+    ],
+  },
+  {
+    id: 9,
+    type: "machine",
+    name: "Chrome Curl Bar",
+    slug: "Chrome-Curl-Bar",
+    price: 67.88,
+    previousPrice: 105.49,
+    aviable: 19,
+    featured: false,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Hampton 28” Revolving Chrome Curl Bar is designed to help you build muscle and tone your arms. The revolving bar features solid steel construction with a hard chrome finish. It also includes ergonomic gel-grip urethane handles, and is a perfect cable attachment for any home gym system.",
+    details: [
+      "The smooth revolving bar allows for maximum workout effectiveness",
+      "Includes Ergonomic Urethane Gel-Grip handles",
+      "Made of nylon construction",
+      "This Revolving Chrome Curl Bar is perfect for use with any home gym that has cable attachments",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/h/a/hampton-28-inch-chrome-curl-bar.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	Hampton Fitness"],
+      ["Demensions ", "W 3' L 28' H3'"],
+    ],
+  },
+  {
+    id: 10,
+    type: "machine",
+    name: "Hampton Multi Exercise Bar",
+    slug: "Hampton-Multi-Exercise-Bar",
+    price: 167.88,
+    previousPrice: 185.49,
+    aviable: 3,
+    featured: false,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Hampton Revolving Multi-Exercise Bar allows you to truly maximize your workout options. The revolving bar features solid steel construction with a hard chrome finish. Its unique design is perfect for a wide range of upper body workouts. The bar also includes ergonomic Gel-Grip Urethane Handles, and is a perfect cable attachment for any home gym system.",
+    details: [
+      "The revolving bar provides maximum workout effectiveness",
+      "Made of solid steel construction with a hard chrome finish",
+      "Includes ergonomic Gel-Grip Urethane Handles",
+      "The Hampton Revolving Multi-Exercise Bar’s unique design is perfect for a wide range of upper body workouts, and is a perfect cable attachment for any home gym system",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/h/a/hampton-multi-exercise-bar.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", " 	Hampton Fitness"],
+      ["Demensions ", "W 13' L 5' H 6'"],
+    ],
+  },
+  {
+    id: 11,
+    type: "measurement",
+    name: "Health-o-Meter HLT Scale",
+    slug: "Health-o-Meter-HLT-Scale",
+    price: 267.88,
+    previousPrice: 365.1,
+    aviable: 2,
+    featured: true,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Health-O-Meter HLT Scale with built in height rod features a large heavy-duty steel ¼ lb. platform with a raised balance beam for increased foot room. It offers easy and accurate readings, and the weight capacity is 390 lbs. This scale also features easy to read double beams with slide poises and a 30-78 measuring rod to monitor growth. The rugged zinc die cast beam is constructed with copper, nickel, chrome plating with protective rolled edges, rounded corners and filled with durable white baked enamel finish.",
+    details: [
+      "Professional grade scale",
+      "Heavy gauge steel base provides accuracy",
+      "Slide height rod measures 30”-78”",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/h/e/health-o-meter-hlt.jpg",
+    ],
+
+    specification: [
+      ["MANUFACTURER", "Health-o-Meter"],
+      ["Demensions ", "W 6,8' L 20' H 59'"],
+      ["Weight ", "30lbs"],
+    ],
+  },
+  {
+    id: 12,
+    type: "measurement",
+    name: "Polar Loop",
+    slug: "Polar-Loop",
+    price: 127.88,
+    previousPrice: 185.49,
+    aviable: 5,
+    featured: true,
+    inCart: false,
+    amountInCart: 1,
+    description:
+      "The Active wristband is a sporty, comfortable fitness tracker dedicated to helping you achieve an active and healthy lifestyle. It works around the clock every single day to track your calories, activity, and sleep, providing you with only the most current and accurate information at any given time.",
+    details: [
+      "Active is continuously updating, so you're provided with the most current and accurate information at any given moment. Giving you exact numbers recorded right down to the very second is crucial to helping you achieve your goals.",
+      "Active completes the iFit family by syncing wirelessly and automatically to everything iFit, bringing it full circle. With its ability to seamlessly connect to all of iFit, you can easily access your information anywhere, anytime through multiple platforms.",
+      "Includes ergonomic Gel-Grip Urethane Handles",
+      "Active is your gateway to living a better life the right way. It goes where you go, serving as the perfect companion. You will constantly be motivated to push forward and stay on track towards achieving your goals.",
+    ],
+    pics: [
+      "https://smhttp-ssl-18062.nexcesscdn.net/media/prod.image/p/o/polar_loop.jpg",
+    ],
+
+    specification: [["MANUFACTURER", "Polar USA"]],
   },
 ];

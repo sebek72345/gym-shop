@@ -15,13 +15,12 @@ const StyledH2 = styled.h2`
   padding-left: 30px;
 `;
 export default function DescriptionProduct({ details }) {
-  console.log(details);
   return (
     <StyledWrapper>
       <StyledH2>Features:</StyledH2>
       <ul>
         {details.map((detail) => (
-          <StyledLi>{detail}</StyledLi>
+          <StyledLi key={detail}>{detail}</StyledLi>
         ))}
       </ul>
     </StyledWrapper>

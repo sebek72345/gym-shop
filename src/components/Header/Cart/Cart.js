@@ -9,12 +9,26 @@ export default function Cart() {
   const { productsInCart } = useContext(ProductContext);
   let [amount, setAmount] = useState(0);
 
-  useDeepCompareEffect(() => {
-    setAmount(
-      productsInCart
-        .map((product) => product[1])
-        .reduce((prev, act) => prev + act)
-    );
+  useEffect(() => {
+    if (productsInCart.length) {
+      setAmount(
+        productsInCart.reduce((acc, product) => {
+          if (product.inCart) {
+            return ++acc;
+          } else {
+            return acc;
+          }
+        }, 0)
+      );
+      /* else {
+      const productFromLocalStorage = window.localStorage.getItem("inCart");
+      console.log(productFromLocalStorage);
+      const temp = productFromLocalStorage.reduce((acc, product) => {
+        return (acc += product.inCart);
+      }, 0);
+      console.log(temp);
+    } */
+    }
   }, [productsInCart]);
   return (
     <Link className="cart" to={routes.cart}>

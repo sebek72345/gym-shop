@@ -17,9 +17,9 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ name, action, type, icon }) {
+export default function Button({ name, action, type, disabled }) {
   return (
-    <StyledButton type={type} onClick={action}>
+    <StyledButton type={type} onClick={action} disabled={disabled}>
       {name}
     </StyledButton>
   );

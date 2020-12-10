@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ProductContext } from "../../context";
 import Button from "../../components/Button/Button";
 import StoreIcon from "@material-ui/icons/Store";
@@ -8,37 +8,40 @@ import InputQuantity from "../../components/InputQuantity/InputQuantity";
 import TabPanel from "./Tab/Tab";
 import "./SingleProduct.scss";
 export default function SingleProduct(props) {
-  const { getProduct } = useContext(ProductContext);
+  const { currentProducts, getProduct, addProductToCart } = useContext(
+    ProductContext
+  );
   const titlePage = props.match.params.slug;
-  const product = getProduct(titlePage);
   const deliveryDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 2);
   const deliveryDateString = ` ${deliveryDate.getDate()}.${
     deliveryDate.getMonth() + 1
   }.${deliveryDate.getFullYear()}`;
   let [quantityProduct, setQuantityProduct] = useState(1);
-
+  useEffect(() => {
+    getProduct(titlePage);
+    console.log(titlePage);
+  }, []);
   const handleSubmited = (e) => {
     e.preventDefault();
-    console.log("Add to cart");
+    addProductToCart(titlePage, quantityProduct);
   };
-
   return (
     <div className="single-product-wrapper">
-      {product ? (
+      {currentProducts ? (
         <>
           <div className="main-information">
             <div className="single-product-image">
-              <img src={product.pics[0]} alt="product-image" />
+              <img src={currentProducts.pics[0]} alt="product-image" />
             </div>
             <div className="product-basic-information">
-              <h3>{product.name}</h3>
+              <h3>{currentProducts.name}</h3>
               <h5>
-                {product.price}
-                <span>{product.previousPrice}</span>
+                $ {currentProducts.price}
+                <span>$ {currentProducts.previousPrice}</span>
               </h5>
               <p>
                 <StoreIcon />
-                In store: {product.aviable && "available"}
+                In store: {currentProducts.available && "available"}
               </p>
               <p>
                 <LocalShippingIcon />
@@ -53,15 +56,21 @@ export default function SingleProduct(props) {
                 <InputQuantity
                   quantity={quantityProduct}
                   setQuantity={setQuantityProduct}
+                  disabled={currentProducts.inCart}
+                  maxAvailableProduct={currentProducts.available}
                 />
-                <Button name="Add to cart" type="submit" />
+                <Button
+                  name={currentProducts.inCart ? "In Card" : "Add to cart"}
+                  type="submit"
+                  disabled={currentProducts.inCart}
+                />
               </form>
             </div>
           </div>
-          <TabPanel product={product} />
+          <TabPanel product={currentProducts} />
         </>
       ) : (
-        <p>Site is no aviable</p>
+        <p>Site is no available</p>
       )}
     </div>
   );

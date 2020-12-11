@@ -1,26 +1,25 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Card from "./../../Card/Card";
+import SortBy from "../SortBy/SortBy";
 import "./ProductWrapper.scss";
+import { ProductContext } from "../../../context";
 export default function ProductWrapper({ products }) {
+  const { productsCategory, useFilters } = useContext(ProductContext);
+
+  const [optionValue, setOptionValue] = useState("price-low");
+
+  useFilters(optionValue);
   return (
     <main className="product-container">
       <div className="sorting-container">
         <p className="category product-counter">
           found {products.length} products in this catergory
         </p>
-        <div className="sort-by">
-          <span>Sort by:</span>
-          <select name="sortBy" className="sort-by-select">
-            <option value="price-low">Price:descending</option>
-            <option value="price-up">Price:ascending</option>
-            <option value="name-low">Name: A to Z</option>
-            <option value="name-up">Name: Z to A</option>
-          </select>
-        </div>
+        <SortBy optionValue={optionValue} setOptionValue={setOptionValue} />
       </div>
       <div className="product-wrapper">
-        {products
-          ? products.map((product) => (
+        {productsCategory
+          ? productsCategory.map((product) => (
               <Card
                 price={product.price}
                 previousPrice={product.previousPrice}

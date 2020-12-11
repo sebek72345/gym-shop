@@ -5,24 +5,18 @@ import InputQuantity from "../InputQuantity/InputQuantity";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import "./ProductInCart.scss";
-export default function ProductInCart({
-  name,
-  price,
-  image,
-  link,
-  maxAvailableProduct,
-}) {
-  const { getAmounProductInCart, removeItemFromCart } = useContext(
-    ProductContext
-  );
-  const amountIn = getAmounProductInCart("Chrome-Curl-Bar");
-  let [quantity, setQuantity] = useState(amountIn);
-
+export default function ProductInCart({ product }) {
+  const { name, price, pics, slug, available, amountInCart } = product;
+  const { removeItemFromCart } = useContext(ProductContext);
+  const totalPriceForOneItem = price * amountInCart;
+  const totalPriceRound = totalPriceForOneItem.toFixed(2);
+  let [quantity, setQuantity] = useState(amountInCart);
+  console.log(totalPriceRound);
   return (
     <div className="summary-basket">
       <div className="summary-image">
-        <Link to={`products/${link}`}>
-          <img src={image} alt="image product" />
+        <Link to={`products/${slug}`}>
+          <img src={pics[0]} alt="image product" />
         </Link>
       </div>
       <div className="product-details">
@@ -33,16 +27,22 @@ export default function ProductInCart({
             quantity={quantity}
             setQuantity={setQuantity}
             addWithoutButton
-            maxAvailableProduct={maxAvailableProduct}
-            name={name}
+            maxAvailableProduct={available}
+            name={slug}
           />
         </p>
       </div>
       <div className="product-action">
         <div className="product-action-price">
-          <p>{price}</p>
+          <p>${totalPriceRound}</p>
+          {amountInCart >= 2 && (
+            <p className="product-action-one">per item ${price}</p>
+          )}
         </div>
-        <DeleteForeverIcon onClick={() => removeItemFromCart(name)} />
+        <DeleteForeverIcon
+          style={{ fontSize: "32px", cursor: "pointer" }}
+          onClick={() => removeItemFromCart(slug)}
+        />
       </div>
     </div>
   );

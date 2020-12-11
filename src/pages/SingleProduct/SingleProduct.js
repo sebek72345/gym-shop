@@ -8,40 +8,44 @@ import InputQuantity from "../../components/InputQuantity/InputQuantity";
 import TabPanel from "./Tab/Tab";
 import "./SingleProduct.scss";
 export default function SingleProduct(props) {
-  const { currentProducts, getProduct, addProductToCart } = useContext(
-    ProductContext
-  );
+  const { getProduct, addProductToCart } = useContext(ProductContext);
   const titlePage = props.match.params.slug;
   const deliveryDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 2);
   const deliveryDateString = ` ${deliveryDate.getDate()}.${
     deliveryDate.getMonth() + 1
   }.${deliveryDate.getFullYear()}`;
   let [quantityProduct, setQuantityProduct] = useState(1);
+  let [currentPage, setcurrentPage] = useState();
+
   useEffect(() => {
-    getProduct(titlePage);
-    console.log(titlePage);
-  }, []);
+    const currentPage = getProduct(titlePage);
+    const initalAmount = currentPage.amountInCart
+      ? currentPage.amountInCart
+      : 1;
+    setQuantityProduct(initalAmount);
+    setcurrentPage(currentPage);
+  }, [titlePage]);
   const handleSubmited = (e) => {
     e.preventDefault();
     addProductToCart(titlePage, quantityProduct);
   };
   return (
     <div className="single-product-wrapper">
-      {currentProducts ? (
+      {currentPage ? (
         <>
           <div className="main-information">
             <div className="single-product-image">
-              <img src={currentProducts.pics[0]} alt="product-image" />
+              <img src={currentPage.pics[0]} alt="product-image" />
             </div>
             <div className="product-basic-information">
-              <h3>{currentProducts.name}</h3>
+              <h3>{currentPage.name}</h3>
               <h5>
-                $ {currentProducts.price}
-                <span>$ {currentProducts.previousPrice}</span>
+                $ {currentPage.price}
+                <span>$ {currentPage.previousPrice}</span>
               </h5>
               <p>
                 <StoreIcon />
-                In store: {currentProducts.available && "available"}
+                In store: {currentPage.available && "available"}
               </p>
               <p>
                 <LocalShippingIcon />
@@ -56,18 +60,19 @@ export default function SingleProduct(props) {
                 <InputQuantity
                   quantity={quantityProduct}
                   setQuantity={setQuantityProduct}
-                  disabled={currentProducts.inCart}
-                  maxAvailableProduct={currentProducts.available}
+                  disabled={currentPage.inCart}
+                  maxAvailableProduct={currentPage.available}
+                  addWithoutButton={false}
                 />
                 <Button
-                  name={currentProducts.inCart ? "In Card" : "Add to cart"}
+                  name={currentPage.inCart ? "In Card" : "Add to cart"}
                   type="submit"
-                  disabled={currentProducts.inCart}
+                  disabled={currentPage.inCart}
                 />
               </form>
             </div>
           </div>
-          <TabPanel product={currentProducts} />
+          <TabPanel product={currentPage} />
         </>
       ) : (
         <p>Site is no available</p>

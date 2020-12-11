@@ -6,9 +6,9 @@ export const ProductContext = createContext();
 const ProductContextProvider = ({ children }) => {
   const [productsCategory, setProductCategory] = useState();
   const [products, setProducts] = useState();
-  const [currentProducts, setCurrentProducts] = useState();
+  const [actualPage, setActualPage] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
-  const [featuredProducts, setFeaturedProducts] = useState();
+  const [filter, setFilter] = useState();
   useEffect(() => {
     setProducts(data);
     return () => setProducts([]);
@@ -20,35 +20,59 @@ const ProductContextProvider = ({ children }) => {
     setProductCategory(productFromCategory);
   }
   const addProductToCart = (name, amount) => {
-    const temp = currentProducts;
+    const temp = actualPage;
     temp.inCart = true;
     temp.amountInCart += amount;
-    setProductsInCart([...productsInCart, temp]);
+    const tempAllProd = products;
+    tempAllProd.map((prod) => {
+      if (prod.slug === name) {
+        return temp;
+      } else return prod;
+    });
+    setProductsInCart([temp, ...productsInCart]);
+    setProducts(tempAllProd);
     window.localStorage.setItem(
       "inCart",
-      JSON.stringify([...productsInCart, temp])
+      JSON.stringify([temp, ...productsInCart])
     );
   };
   const removeItemFromCart = (name) => {
-    getProduct(name);
-    const removeItem = productsInCart.filter((product) => product.name == name);
-    const temp = productsInCart.filter((product) => product.name !== name);
-    console.log({ removeItem, temp });
-    removeItem.inCart = false;
-    removeItem.amountInCart = 0;
-    setProducts([...temp, removeItem]);
+    const temp = productsInCart.filter((product) => product.slug !== name);
+
+    const tempAllProd = products;
+    tempAllProd.map((prod) => {
+      if (prod.slug === name) {
+        prod.inCart = false;
+        prod.amountInCart = 0;
+      }
+    });
+
+    setProducts(tempAllProd);
     setProductsInCart(temp);
   };
-  const getAmounProductInCart = (name) => {
-    getProduct(name);
-    return currentProducts.amountInCart;
-  };
 
-  const increaseProductInCart = (name, number) => {
+  const increaseProductInCart = (name) => {
+    changeProductInCart(name, 1);
+  };
+  const decreaseProductInCart = (name) => {
+    changeProductInCart(name, -1);
+  };
+  const changeProductInCart = (name, action) => {
     const temp = getProduct(name);
-    currentProducts += number;
-    const arrayCart = productsInCart.filter((product) => product.slug !== name);
-    console.log(arrayCart);
+    if (action === -1 && temp.amountInCart === 0)
+      return removeItemFromCart(name);
+    if (action === 1 && temp.available <= temp.amountInCart) return;
+    console.log(temp.amountInCart);
+    temp.amountInCart += action;
+    console.log(temp);
+    console.log((temp.amountInCart += action));
+    const arrayCart = productsInCart.map((product) => {
+      if (product.slug === name) {
+        return (product = temp);
+      } else return product;
+    });
+
+    setProductsInCart([...arrayCart]);
   };
   /*  const reduceInCart = () => {
     const res = Object.entries(
@@ -69,11 +93,64 @@ const ProductContextProvider = ({ children }) => {
     setProductsInCart([...productsInCart, add]);
     reduceInCart();
   }; */
+  const useFilters = (filterName) => {
+    let tempProd;
+    switch (filterName) {
+      case "price-low":
+        tempProd = productsCategory.sort((first, second) => {
+          if (first.price < second.price) {
+            return 1;
+          }
+          if (first.price > second.price) {
+            return -1;
+          }
+        });
+        break;
+      case "price-up":
+        tempProd = productsCategory.sort((first, second) => {
+          if (first.price > second.price) {
+            return 1;
+          }
+          if (first.price < second.price) {
+            return -1;
+          }
+        });
+        break;
+      case "name-low":
+        tempProd = productsCategory.sort((first, second) => {
+          if (first.name > second.name) {
+            return 1;
+          }
+          if (first.name < second.name) {
+            return -1;
+          }
+        });
+        break;
+      case "name-up":
+        tempProd = productsCategory.sort((first, second) => {
+          if (first.name < second.name) {
+            return 1;
+          }
+          if (first.name > second.name) {
+            return -1;
+          }
+        });
+        break;
+      default:
+        return productsCategory;
+        break;
+    }
+    const a = tempProd.map((a) => a.price);
+
+    console.log(tempProd);
+    setProductCategory(tempProd);
+    return productsCategory;
+  };
   const getProduct = (product) => {
     const actualProduct = products
       ? products.filter((item) => item.slug === product)[0]
       : undefined;
-    setCurrentProducts(actualProduct);
+    setActualPage(actualProduct);
     return actualProduct;
   };
   const capitalize = (word) => {
@@ -86,7 +163,8 @@ const ProductContextProvider = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
-        currentProducts,
+        decreaseProductInCart,
+        actualPage,
         getProductCategory,
         capitalize,
         getFeaturedProducts,
@@ -95,10 +173,9 @@ const ProductContextProvider = ({ children }) => {
         getProduct,
         removeItemFromCart,
         addProductToCart,
-        getAmounProductInCart,
         increaseProductInCart,
-        /* changeProductInCart, */
         products,
+        useFilters,
       }}
     >
       {children}

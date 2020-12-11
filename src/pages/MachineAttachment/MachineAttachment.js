@@ -8,6 +8,7 @@ export default function Mats(props) {
   const { productsCategory, getProductCategory, capitalize } = useContext(
     ProductContext
   );
+  console.log(productsCategory);
   useEffect(() => {
     (() => {
       if (category) {

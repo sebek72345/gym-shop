@@ -4,7 +4,7 @@ import CategoryTitle from "../../components/accesoriesComponent/CategoryTitle/Ca
 import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
 export default function Mats(props) {
-  const [category, setCategory] = useState("mats");
+  const category = "mats";
   const { productsCategory, getProductCategory, capitalize } = useContext(
     ProductContext
   );

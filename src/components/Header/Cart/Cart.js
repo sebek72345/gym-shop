@@ -28,6 +28,8 @@ export default function Cart() {
       }, 0);
       console.log(temp);
     } */
+    } else {
+      setAmount(0);
     }
   }, [productsInCart]);
   return (

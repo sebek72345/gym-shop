@@ -9,4 +9,24 @@
       flex-grow: 1;
     }
   }
+  .empty-cart {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 3px 5px rgb(238, 238, 238);
+    border-radius: 10px;
+    align-items: center;
+    padding: 20px 0;
+    &-text {
+      font-family: "Nunito", sans-serif;
+      font-size: 18px;
+    }
+    &-link {
+      margin-top: 26px;
+      padding: 5px;
+      border-radius: 10px;
+      background-color: rgb(231, 231, 231);
+      cursor: pointer;
+      box-shadow: 2px 2px 3px 2px rgb(238, 238, 238);
+    }
+  }
 }

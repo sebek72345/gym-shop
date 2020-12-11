@@ -1,43 +1,54 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 import "./InputQuantity.scss";
 import "react-notifications/lib/notifications.css";
+import { ProductContext } from "../../context";
 export default function InputQuantity({
   quantity,
   setQuantity,
   disabled,
   addWithoutButton,
   maxAvailableProduct,
-  increaseProductInCart,
+
   name,
 }) {
+  const { increaseProductInCart, decreaseProductInCart } = useContext(
+    ProductContext
+  );
   const increase = () => {
     if (quantity < maxAvailableProduct) {
-      setQuantity(++quantity);
-      increaseProductInCart(name, quantity);
-      return;
+      return setQuantity(++quantity);
     }
     NotificationManager.info(
       `You can't add more products. We have only ${maxAvailableProduct} items`
     );
-    return quantity;
+  };
+  const decrease = () => {
+    if (quantity > 1) {
+      console.log("ss");
+      return setQuantity(--quantity);
+    }
+    console.log("ssa");
+    console.log(quantity);
+  };
+  const changeQuantity = (e) => {
+    const receivedValue = e.target.value;
+    setQuantity(receivedValue);
   };
   return (
     <div className="quantity-product">
       <button
         disabled={disabled}
         type="button"
-        onClick={() =>
-          setQuantity(() => {
-            if (quantity > 1) {
-              --quantity;
-            }
-            return quantity;
-          })
-        }
+        onClick={() => {
+          if (addWithoutButton) {
+            decreaseProductInCart(name);
+          }
+          decrease();
+        }}
         className="button button-up"
       >
         -
@@ -47,20 +58,18 @@ export default function InputQuantity({
         min="1"
         max={maxAvailableProduct}
         value={quantity}
-        onChange
+        onChange={(e) => {
+          changeQuantity(e);
+        }}
       />
       <button
         disabled={disabled}
         type="button"
         onClick={() => {
-          console.log({ quantity, maxAvailableProduct });
-          if (quantity < maxAvailableProduct) {
-            return setQuantity(++quantity);
+          if (addWithoutButton) {
+            increaseProductInCart(name);
           }
-          NotificationManager.info(
-            `You can't add more products. We have only ${maxAvailableProduct} items`
-          );
-          return quantity;
+          increase();
         }}
         className="button button-down"
       >

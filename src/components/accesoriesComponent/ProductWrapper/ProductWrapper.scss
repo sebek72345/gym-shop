@@ -7,20 +7,6 @@
     align-items: center;
     color: #868686;
     padding-bottom: 42px;
-
-    .sort-by {
-      &-select {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        width: 200px;
-        appearance: none;
-        background: url("../../../assets/arrow-down.svg") 96% / 10% no-repeat;
-      }
-      span {
-        margin-right: 12px;
-      }
-    }
   }
   .product-wrapper {
     display: grid;

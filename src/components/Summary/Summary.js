@@ -13,10 +13,12 @@ export default function Summary() {
   } else {
     const productInCartFromSesion = window.localStorage.getItem("inCart");
     console.log(productInCartFromSesion);
-    totalProduct = productsInCart.reduce((acc, product) => {
-      const totalOneProd = product.amountInCart * product.price;
-      return (acc += totalOneProd);
-    }, 0);
+    totalProduct = productsInCart
+      .reduce((acc, product) => {
+        const totalOneProd = product.amountInCart * product.price;
+        return (acc += totalOneProd);
+      }, 0)
+      .toFixed(2);
   }
   const deliveryCost = 10;
   const discount = 0.05;

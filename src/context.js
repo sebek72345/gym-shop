@@ -9,8 +9,8 @@ const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState();
   const [actualPage, setActualPage] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
-  const [filterBrands, setFilterBrands] = useState(false);
-  const [filterPrice, setFilterPrice] = useState(false);
+  const [filterBrands, setFilterBrands] = useState([]);
+  const [filterPrice, setFilterPrice] = useState([]);
   useEffect(() => {
     setProducts(data);
     return () => setProducts([]);
@@ -86,48 +86,54 @@ const ProductContextProvider = ({ children }) => {
     setProductsInCart([...arrayCart]);
   };
   const filterByPrice = (min, max, category) => {
+    console.log(filterBrands.length);
+    console.log(filterBrands);
     let tempProd;
-    if (!filterBrands) {
+    if (!filterBrands.length) {
       const prodToFilter = getProductCategory(category);
-      console.log(prodToFilter);
-      setSortedProducts(prodToFilter);
       tempProd = prodToFilter.filter((prod) => {
         if ((prod.price > Number(min)) & (prod.price < Number(max))) {
           return prod;
         }
       });
+      setSortedProducts(tempProd);
     }
-    if (filterBrands) {
-      console.log(sortedProducts);
-      const prodToFilter = sortedProducts;
-      tempProd = prodToFilter.filter((prod) => {
+    if (filterBrands.length) {
+      tempProd = sortedProducts.filter((prod) => {
         if ((prod.price > Number(min)) & (prod.price < Number(max))) {
           return prod;
         }
       });
-      console.log(tempProd);
     }
-    setFilterPrice(true);
+    if (filterBrands.length && filterPrice.length) {
+    }
+    setFilterPrice([min, max]);
     setProductCategory(tempProd);
   };
+
   const useFiltersBrand = (brand, category) => {
     let tempProd;
-    if (filterPrice) {
-      const prodToFilter = sortedProducts;
-      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
-    }
-    if (!filterPrice) {
+    console.log(filterPrice.length);
+    if (!filterPrice.length) {
       const prodToFilter = getProductCategory(category);
-      setSortedProducts(prodToFilter);
+      console.log("jestem");
       tempProd = prodToFilter.filter((prod) => prod.brand === brand);
+      setSortedProducts(tempProd);
+    }
+    /*  if (filterBrands.length && filterPrice.length) {
+      const prodToFilter = getProductCategory(category);
+      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
+    } */
+    if (filterPrice.length) {
+      tempProd = sortedProducts.filter((prod) => prod.brand === brand);
     }
 
-    setFilterBrands(true);
+    setFilterBrands([brand]);
     setProductCategory(tempProd);
   };
   const useFilters = (filterName) => {
     let tempProd;
-    console.log(filterName);
+
     switch (filterName) {
       case "price-low":
         tempProd = productsCategory.sort((first, second) => {
@@ -172,11 +178,20 @@ const ProductContextProvider = ({ children }) => {
       default:
         break;
     }
-
     setProductCategory(tempProd);
     return productsCategory;
   };
-
+  const resetFilters = (category) => {
+    setFilterBrands({});
+    setFilterPrice({});
+    [...document.querySelectorAll("input[name='filter-value']")].forEach(
+      (input) => (input.checked = false)
+    );
+    [...document.querySelectorAll("input[name='brandRadio']")].forEach(
+      (input) => (input.checked = false)
+    );
+    getProductCategory(category);
+  };
   const getBrand = (productsCategory) => {
     let nameBrands = productsCategory
       ? productsCategory.map((prod) => prod.brand)
@@ -194,6 +209,10 @@ const ProductContextProvider = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
+        filterBrands,
+        filterPrice,
+        setFilterBrands,
+        setFilterPrice,
         sortedProducts,
         filterByPrice,
         decreaseProductInCart,
@@ -211,6 +230,7 @@ const ProductContextProvider = ({ children }) => {
         useFilters,
         getBrand,
         useFiltersBrand,
+        resetFilters,
       }}
     >
       {children}

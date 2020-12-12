@@ -11,9 +11,7 @@ export default function Filters({ brands, category }) {
       </label>
     ));
   };
-  const { filterByPrice, useFilters, useFiltersBrand } = useContext(
-    ProductContext
-  );
+  const { filterByPrice, useFiltersBrand } = useContext(ProductContext);
   const setFiltersPrice = (e) => {
     const min = e.target.dataset.min;
     const max = e.target.dataset.max;

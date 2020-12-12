@@ -25,14 +25,14 @@ export default function Button({
   toExecute,
   category,
 }) {
-  const { getProductCategory } = useContext(ProductContext);
+  const { resetFilters } = useContext(ProductContext);
 
   return (
     <StyledButton
       type={type}
       onClick={action}
       disabled={disabled}
-      onClick={() => (category ? getProductCategory(category) : null)}
+      onClick={() => (category ? resetFilters(category) : null)}
     >
       {name}
     </StyledButton>

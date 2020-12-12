@@ -10,10 +10,12 @@ export default function Mats(props) {
     getProductCategory,
     capitalize,
     getBrand,
+    setCurrentCategory,
   } = useContext(ProductContext);
   let [nameBrands, setNameBrands] = useState();
   useEffect(() => {
     (() => {
+      setCurrentCategory(category);
       if (category) {
         getProductCategory(category);
         const temp = getProductCategory(category);

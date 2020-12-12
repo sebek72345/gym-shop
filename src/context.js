@@ -9,12 +9,17 @@ const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState();
   const [actualPage, setActualPage] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
-  const [filterBrands, setFilterBrands] = useState([]);
-  const [filterPrice, setFilterPrice] = useState([]);
+  const [filterBrands, setFilterBrands] = useState();
+  const [filterPrice, setFilterPrice] = useState();
+  const [currentCategory, setCurrentCategory] = useState();
   useEffect(() => {
     setProducts(data);
     return () => setProducts([]);
   }, []);
+
+  useEffect(() => {
+    componentFilter(currentCategory);
+  }, [filterBrands, filterPrice]);
   function getProductCategory(category) {
     const productFromCategory = data.filter(
       (product) => product.type === category
@@ -86,50 +91,35 @@ const ProductContextProvider = ({ children }) => {
     setProductsInCart([...arrayCart]);
   };
   const filterByPrice = (min, max, category) => {
-    console.log(filterBrands.length);
-    console.log(filterBrands);
-    let tempProd;
-    if (!filterBrands.length) {
-      const prodToFilter = getProductCategory(category);
-      tempProd = prodToFilter.filter((prod) => {
-        if ((prod.price > Number(min)) & (prod.price < Number(max))) {
-          return prod;
-        }
-      });
-      setSortedProducts(tempProd);
-    }
-    if (filterBrands.length) {
-      tempProd = sortedProducts.filter((prod) => {
-        if ((prod.price > Number(min)) & (prod.price < Number(max))) {
-          return prod;
-        }
-      });
-    }
-    if (filterBrands.length && filterPrice.length) {
-    }
     setFilterPrice([min, max]);
-    setProductCategory(tempProd);
   };
 
   const useFiltersBrand = (brand, category) => {
-    let tempProd;
-    console.log(filterPrice.length);
-    if (!filterPrice.length) {
-      const prodToFilter = getProductCategory(category);
-      console.log("jestem");
-      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
-      setSortedProducts(tempProd);
+    setFilterBrands(brand);
+  };
+  const componentFilter = (category) => {
+    let filteredProduct;
+    filteredProduct = getProductCategory(category);
+    console.log(filteredProduct);
+    console.log({ filterBrands, filterPrice });
+    if (filterBrands) {
+      filteredProduct = filteredProduct.filter(
+        (prod) => prod.brand === filterBrands
+      );
     }
-    /*  if (filterBrands.length && filterPrice.length) {
-      const prodToFilter = getProductCategory(category);
-      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
-    } */
-    if (filterPrice.length) {
-      tempProd = sortedProducts.filter((prod) => prod.brand === brand);
+    console.log(filteredProduct);
+    if (filterPrice) {
+      filteredProduct = filteredProduct.filter((prod) => {
+        if (
+          (prod.price > Number(filterPrice[0])) &
+          (prod.price < Number(filterPrice[1]))
+        ) {
+          return prod;
+        }
+      });
     }
-
-    setFilterBrands([brand]);
-    setProductCategory(tempProd);
+    console.log(filteredProduct);
+    setProductCategory(filteredProduct);
   };
   const useFilters = (filterName) => {
     let tempProd;
@@ -209,6 +199,8 @@ const ProductContextProvider = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
+        currentCategory,
+        setCurrentCategory,
         filterBrands,
         filterPrice,
         setFilterBrands,

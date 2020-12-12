@@ -12,11 +12,13 @@ export default function Mats(props) {
     setFilterBrands,
     setFilterPrice,
     getBrand,
+    setCurrentCategory,
   } = useContext(ProductContext);
   let [nameBrands, setNameBrands] = useState();
 
   useEffect(() => {
     (() => {
+      setCurrentCategory(category);
       setFilterBrands({});
       setFilterPrice({});
       if (category) {

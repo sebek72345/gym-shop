@@ -49,8 +49,8 @@ const LoginForm = (props) => {
             {touched.password ? errors.password : null}
           </span>
 
-          {/* <Button name="Login" className="login-btn" type="submit" /> */}
-          <button type="submit">Login</button>
+          {<Button name="Login" className="login-btn" type="submit" />}
+          {/* <button type="submit">Login</button> */}
           <Link to={routes.signUp} className="form-outerLink">
             <span>Sign Up</span>
           </Link>

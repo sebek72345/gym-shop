@@ -11,6 +11,7 @@ export default [
     details: [],
     inCart: false,
     amountInCart: 0,
+    brand: "2XL Corp",
     description:
       "OVERVIEV Key Features of the Aeromat Elite Workout Mat with Eyelets: Great for any floor exercis Easy to clean with damp cloth Light weight, easy to roll up, with convenient carry handle",
     pics: [
@@ -24,12 +25,13 @@ export default [
     type: "mats",
     name: "Aeromat Black Rollup",
     slug: "Aeromat-Black-Rollup",
-    price: 33.99,
+    price: 52.99,
     previousPrice: 45.99,
     available: 10,
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "2XL Corp",
     description:
       "The Aeromat Rollup Mat in black is ideal for any floor exercise. Designed with closed cell foam structure, this mat has superior cushioning and is body heat retentive. The non-absorbent surface makes it impervious to sweat and water. Velcro straps are included for easy transportation. Wipe clean with a damp cloth.",
     details: [
@@ -57,6 +59,7 @@ export default [
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "Prism Fitness Group",
     description:
       "This space saving storage display allows for easy access to the essential fitness training products.",
     details: [
@@ -88,6 +91,7 @@ export default [
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "Aeromats",
     description:
       "Effortlessly switch between standing and floor exercises with the medium thickness of this premium exercise mat. This mat gives you the perfect surface for Pilates, yoga and a variety of other fitness types. Depending on your preference and each movement, you can switch sides between the textured one and the smooth one of this dual-sided mat.",
     details: [
@@ -115,6 +119,7 @@ export default [
     featured: true,
     inCart: false,
     amountInCart: 0,
+    brand: "2XL Corp",
     description: "Key Features of the 2XL Corp Gym Wipes Antibacterial Refill:",
     details: [
       "2XL Corporation now provides EPA registered disinfectant wipes in a 700 count  refill pack (extra-thick, super-absorbent 8 x 6 towelette size) designed to sanitize surfaces.  Alcohol-free, bleach-free and phenol-free.  Gym Wipes Antibacterial Towelettes, are pre-moistened, disposable, surface disinfecting wipes, that have been developed to stop cross-contamination on surfaces.  Gym Wipes will sanitize surfaces and kill 99.9% of germs that can cause illness.",
@@ -127,7 +132,7 @@ export default [
     ],
 
     specification: [
-      ["MANUFACTURER", " 	2XL Corp"],
+      ["MANUFACTURER", "2XL Corp"],
       ["Product Number ", "2XL-101"],
     ],
   },
@@ -142,6 +147,7 @@ export default [
     featured: true,
     inCart: false,
     amountInCart: 0,
+    brand: "The Cleaning Station",
     description:
       "Key Features of The Cleaning Station Dry Towels: The Cleaning Station 2-Ply Dry Towel is the perfect companion to The Cleaning Station. This towel is economical and practical for a variety of uses. Protects against germs and viruses since consumers only touch the towel they’ll use. The Cleaning Station’s engineered nozzle provides reliable results, pull after pull. A great overall towel for keeping costs under control!",
     details: [
@@ -170,6 +176,7 @@ export default [
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "Hampton Fitness",
     description:
       "The Hampton Triceps Press-Down Rope with double grips tones and strengthens the arms and upper body. It features ergonomic gel-grip urethane handles for maximum comfort. This rope is made of nylon construction, and is a perfect cable attachment for any home gym system.",
     details: [
@@ -198,6 +205,7 @@ export default [
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "Hampton Fitness",
     description:
       "The Hampton 28” Revolving Chrome Curl Bar is designed to help you build muscle and tone your arms. The revolving bar features solid steel construction with a hard chrome finish. It also includes ergonomic gel-grip urethane handles, and is a perfect cable attachment for any home gym system.",
     details: [
@@ -226,6 +234,7 @@ export default [
     featured: false,
     inCart: false,
     amountInCart: 0,
+    brand: "Hampton Fitness",
     description:
       "The Hampton Revolving Multi-Exercise Bar allows you to truly maximize your workout options. The revolving bar features solid steel construction with a hard chrome finish. Its unique design is perfect for a wide range of upper body workouts. The bar also includes ergonomic Gel-Grip Urethane Handles, and is a perfect cable attachment for any home gym system.",
     details: [
@@ -254,6 +263,7 @@ export default [
     featured: true,
     inCart: false,
     amountInCart: 0,
+    brand: "Health-o-Meter",
     description:
       "The Health-O-Meter HLT Scale with built in height rod features a large heavy-duty steel ¼ lb. platform with a raised balance beam for increased foot room. It offers easy and accurate readings, and the weight capacity is 390 lbs. This scale also features easy to read double beams with slide poises and a 30-78 measuring rod to monitor growth. The rugged zinc die cast beam is constructed with copper, nickel, chrome plating with protective rolled edges, rounded corners and filled with durable white baked enamel finish.",
     details: [
@@ -282,6 +292,7 @@ export default [
     featured: true,
     inCart: false,
     amountInCart: 0,
+    brand: "Polar USA",
     description:
       "The Active wristband is a sporty, comfortable fitness tracker dedicated to helping you achieve an active and healthy lifestyle. It works around the clock every single day to track your calories, activity, and sleep, providing you with only the most current and accurate information at any given time.",
     details: [

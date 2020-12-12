@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-
+import { ProductContext } from "../../context";
 const StyledButton = styled.button`
   color: #818080;
   border: 1px solid #110404;
@@ -17,9 +17,23 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ name, action, type, disabled }) {
+export default function Button({
+  name,
+  action,
+  type,
+  disabled,
+  toExecute,
+  category,
+}) {
+  const { getProductCategory } = useContext(ProductContext);
+
   return (
-    <StyledButton type={type} onClick={action} disabled={disabled}>
+    <StyledButton
+      type={type}
+      onClick={action}
+      disabled={disabled}
+      onClick={() => (category ? getProductCategory(category) : null)}
+    >
       {name}
     </StyledButton>
   );

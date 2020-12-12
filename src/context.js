@@ -5,10 +5,12 @@ export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [productsCategory, setProductCategory] = useState();
+  const [sortedProducts, setSortedProducts] = useState([]);
   const [products, setProducts] = useState();
   const [actualPage, setActualPage] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
-  const [filter, setFilter] = useState();
+  const [filterBrands, setFilterBrands] = useState(false);
+  const [filterPrice, setFilterPrice] = useState(false);
   useEffect(() => {
     setProducts(data);
     return () => setProducts([]);
@@ -17,8 +19,17 @@ const ProductContextProvider = ({ children }) => {
     const productFromCategory = data.filter(
       (product) => product.type === category
     );
+
     setProductCategory(productFromCategory);
+    return productFromCategory;
   }
+  const getProduct = (product) => {
+    const actualProduct = products
+      ? products.filter((item) => item.slug === product)[0]
+      : undefined;
+    setActualPage(actualProduct);
+    return actualProduct;
+  };
   const addProductToCart = (name, amount) => {
     const temp = actualPage;
     temp.inCart = true;
@@ -74,27 +85,49 @@ const ProductContextProvider = ({ children }) => {
 
     setProductsInCart([...arrayCart]);
   };
-  /*  const reduceInCart = () => {
-    const res = Object.entries(
-      productsInCart.reduce((acc, [name, value]) => {
-        if (!acc[name]) {
-          acc[name] = value;
-        } else {
-          acc[name] += value;
+  const filterByPrice = (min, max, category) => {
+    let tempProd;
+    if (!filterBrands) {
+      const prodToFilter = getProductCategory(category);
+      console.log(prodToFilter);
+      setSortedProducts(prodToFilter);
+      tempProd = prodToFilter.filter((prod) => {
+        if ((prod.price > Number(min)) & (prod.price < Number(max))) {
+          return prod;
         }
+      });
+    }
+    if (filterBrands) {
+      console.log(sortedProducts);
+      const prodToFilter = sortedProducts;
+      tempProd = prodToFilter.filter((prod) => {
+        if ((prod.price > Number(min)) & (prod.price < Number(max))) {
+          return prod;
+        }
+      });
+      console.log(tempProd);
+    }
+    setFilterPrice(true);
+    setProductCategory(tempProd);
+  };
+  const useFiltersBrand = (brand, category) => {
+    let tempProd;
+    if (filterPrice) {
+      const prodToFilter = sortedProducts;
+      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
+    }
+    if (!filterPrice) {
+      const prodToFilter = getProductCategory(category);
+      setSortedProducts(prodToFilter);
+      tempProd = prodToFilter.filter((prod) => prod.brand === brand);
+    }
 
-        return acc;
-      }, {})
-    ).map(([name, value]) => [name, value]);
-
-    console.log(res);
-  }; */
-  /* const changeProductInCart = (add) => {
-    setProductsInCart([...productsInCart, add]);
-    reduceInCart();
-  }; */
+    setFilterBrands(true);
+    setProductCategory(tempProd);
+  };
   const useFilters = (filterName) => {
     let tempProd;
+    console.log(filterName);
     switch (filterName) {
       case "price-low":
         tempProd = productsCategory.sort((first, second) => {
@@ -137,21 +170,19 @@ const ProductContextProvider = ({ children }) => {
         });
         break;
       default:
-        return productsCategory;
         break;
     }
-    const a = tempProd.map((a) => a.price);
 
-    console.log(tempProd);
     setProductCategory(tempProd);
     return productsCategory;
   };
-  const getProduct = (product) => {
-    const actualProduct = products
-      ? products.filter((item) => item.slug === product)[0]
-      : undefined;
-    setActualPage(actualProduct);
-    return actualProduct;
+
+  const getBrand = (productsCategory) => {
+    let nameBrands = productsCategory
+      ? productsCategory.map((prod) => prod.brand)
+      : null;
+    nameBrands = [...new Set(nameBrands)];
+    return nameBrands;
   };
   const capitalize = (word) => {
     return word[0].toUpperCase() + word.slice(1);
@@ -163,6 +194,8 @@ const ProductContextProvider = ({ children }) => {
   return (
     <ProductContext.Provider
       value={{
+        sortedProducts,
+        filterByPrice,
         decreaseProductInCart,
         actualPage,
         getProductCategory,
@@ -176,11 +209,12 @@ const ProductContextProvider = ({ children }) => {
         increaseProductInCart,
         products,
         useFilters,
+        getBrand,
+        useFiltersBrand,
       }}
     >
       {children}
     </ProductContext.Provider>
   );
 };
-
 export default ProductContextProvider;

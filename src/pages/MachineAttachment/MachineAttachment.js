@@ -5,14 +5,19 @@ import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
 export default function Mats(props) {
   const [category, setCategory] = useState("machine");
-  const { productsCategory, getProductCategory, capitalize } = useContext(
-    ProductContext
-  );
-  console.log(productsCategory);
+  const {
+    productsCategory,
+    getProductCategory,
+    capitalize,
+    getBrand,
+  } = useContext(ProductContext);
+  let [nameBrands, setNameBrands] = useState();
   useEffect(() => {
     (() => {
       if (category) {
         getProductCategory(category);
+        const temp = getProductCategory(category);
+        setNameBrands(getBrand(temp));
       }
     })();
   }, [category]);
@@ -22,7 +27,7 @@ export default function Mats(props) {
     <div>
       <CategoryTitle title={categoryTitle} />
       <div style={{ display: "flex" }}>
-        <Filters />
+        {nameBrands && <Filters category={category} brands={nameBrands} />}
         {productsCategory && <ProductWrapper products={productsCategory} />}
       </div>
     </div>

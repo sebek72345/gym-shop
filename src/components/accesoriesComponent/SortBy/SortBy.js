@@ -1,5 +1,6 @@
 import React from "react";
 import "./SortBy.scss";
+
 export default function SortBy({ optionValue, setOptionValue }) {
   const setFilters = (e) => {
     setOptionValue(e.target.value);

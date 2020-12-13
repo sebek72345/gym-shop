@@ -1,22 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { ProductContext } from "../../context";
 import InputQuantity from "../InputQuantity/InputQuantity";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-
 import "./ProductInCart.scss";
+
 export default function ProductInCart({ product }) {
   const { name, price, pics, slug, available, amountInCart } = product;
   const { removeItemFromCart } = useContext(ProductContext);
   const totalPriceForOneItem = price * amountInCart;
   const totalPriceRound = totalPriceForOneItem.toFixed(2);
-  let [quantity, setQuantity] = useState(amountInCart);
-  console.log(totalPriceRound);
+  const [quantity, setQuantity] = useState(amountInCart);
   return (
     <div className="summary-basket">
       <div className="summary-image">
         <Link to={`products/${slug}`}>
-          <img src={pics[0]} alt="image product" />
+          <img src={pics[0]} alt="product" />
         </Link>
       </div>
       <div className="product-details">

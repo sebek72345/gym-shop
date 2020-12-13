@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import * as Yup from "yup";
+import { useFormik } from "formik";
 import Button from "../../components/Button/Button";
 import InputPassword from "../../components/InputPassword/InputPassword";
-import { Link } from "react-router-dom";
 import signUpImage from "../../assets/SignUp.png";
-import { useFormik } from "formik";
 import firebaseApp from "../../firebase/initialization";
 import { routes } from "../../routes";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import * as Yup from "yup";
+
 import "./SignUp.scss";
+
 export default function SignUp() {
   const [visablePassword, setVisablePassword] = useState(false);
   const formik = useFormik({

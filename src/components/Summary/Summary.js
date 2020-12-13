@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import Button from "../Button/Button";
 import "./Summary.scss";
 import { ProductContext } from "../../context";
+
 export default function Summary() {
   const { productsInCart } = useContext(ProductContext);
   let totalProduct;
   if (productsInCart.length) {
     totalProduct = productsInCart.reduce((acc, product) => {
       const totalOneProd = product.amountInCart * product.price;
-      return (acc += totalOneProd);
+      const totalIteration = acc + totalOneProd;
+      return totalIteration;
     }, 0);
   } else {
     const productInCartFromSesion = window.localStorage.getItem("inCart");
@@ -16,7 +18,8 @@ export default function Summary() {
     totalProduct = productsInCart
       .reduce((acc, product) => {
         const totalOneProd = product.amountInCart * product.price;
-        return (acc += totalOneProd);
+        const totalIteration = acc + totalOneProd;
+        return totalIteration;
       }, 0)
       .toFixed(2);
   }

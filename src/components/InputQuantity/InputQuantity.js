@@ -6,13 +6,13 @@ import {
 import "./InputQuantity.scss";
 import "react-notifications/lib/notifications.css";
 import { ProductContext } from "../../context";
+
 export default function InputQuantity({
   quantity,
   setQuantity,
   disabled,
   addWithoutButton,
   maxAvailableProduct,
-
   name,
 }) {
   const { increaseProductInCart, decreaseProductInCart } = useContext(
@@ -20,7 +20,9 @@ export default function InputQuantity({
   );
   const increase = () => {
     if (quantity < maxAvailableProduct) {
-      return setQuantity(++quantity);
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      return;
     }
     NotificationManager.info(
       `You can't add more products. We have only ${maxAvailableProduct} items`
@@ -28,8 +30,9 @@ export default function InputQuantity({
   };
   const decrease = () => {
     if (quantity > 1) {
-      console.log("ss");
-      return setQuantity(--quantity);
+      const newQuantity = quantity + -1;
+      setQuantity(newQuantity);
+      return;
     }
     console.log("ssa");
     console.log(quantity);

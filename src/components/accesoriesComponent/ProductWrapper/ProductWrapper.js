@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import Card from "./../../Card/Card";
+import Card from "../../Card/Card";
 import SortBy from "../SortBy/SortBy";
 import "./ProductWrapper.scss";
 import { ProductContext } from "../../../context";
+
 export default function ProductWrapper({ products }) {
   const { productsCategory, useFilters } = useContext(ProductContext);
 

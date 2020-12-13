@@ -1,23 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import useDeepCompareEffect from "use-deep-compare-effect";
-import { routes } from "../../../routes";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Link } from "react-router-dom";
+import { routes } from "../../../routes";
 import { ProductContext } from "../../../context";
 import "./Cart.scss";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+
 export default function Cart() {
   const { productsInCart } = useContext(ProductContext);
-  let [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     if (productsInCart.length) {
       setAmount(
         productsInCart.reduce((acc, product) => {
           if (product.inCart) {
-            return ++acc;
-          } else {
-            return acc;
+            const total = acc + 1;
+            return total;
           }
+          return acc;
         }, 0)
       );
       /* else {

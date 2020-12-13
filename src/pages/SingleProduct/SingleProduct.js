@@ -1,51 +1,57 @@
 import React, { useContext, useState, useEffect } from "react";
-import { ProductContext } from "../../context";
-import Button from "../../components/Button/Button";
 import StoreIcon from "@material-ui/icons/Store";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
+import { ProductContext } from "../../context";
+import Button from "../../components/Button/Button";
 import InputQuantity from "../../components/InputQuantity/InputQuantity";
-import TabPanel from "./Tab/Tab";
+import TabPanel from "../../components/Tab/Tab";
 import "./SingleProduct.scss";
-export default function SingleProduct(props) {
-  const { getProduct, addProductToCart } = useContext(ProductContext);
-  const titlePage = props.match.params.slug;
-  const deliveryDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 2);
-  const deliveryDateString = ` ${deliveryDate.getDate()}.${
-    deliveryDate.getMonth() + 1
-  }.${deliveryDate.getFullYear()}`;
-  let [quantityProduct, setQuantityProduct] = useState(1);
-  let [currentPage, setcurrentPage] = useState();
 
+export default function SingleProduct({
+  match: {
+    params: { slug },
+  },
+}) {
+  const { getProduct, addProductToCart, actualPage } = useContext(
+    ProductContext
+  );
+  const [quantityProduct, setQuantityProduct] = useState(1);
+  const titlePage = slug;
   useEffect(() => {
     const currentPage = getProduct(titlePage);
     const initalAmount = currentPage.amountInCart
       ? currentPage.amountInCart
       : 1;
     setQuantityProduct(initalAmount);
-    setcurrentPage(currentPage);
   }, [titlePage]);
+
+  const deliveryDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 2);
+  const deliveryDateString = ` ${deliveryDate.getDate()}.${
+    deliveryDate.getMonth() + 1
+  }.${deliveryDate.getFullYear()}`;
+
   const handleSubmited = (e) => {
     e.preventDefault();
     addProductToCart(titlePage, quantityProduct);
   };
   return (
     <div className="single-product-wrapper">
-      {currentPage ? (
+      {actualPage ? (
         <>
           <div className="main-information">
             <div className="single-product-image">
-              <img src={currentPage.pics[0]} alt="product-image" />
+              <img src={actualPage.pics[0]} alt="product" />
             </div>
             <div className="product-basic-information">
-              <h3>{currentPage.name}</h3>
+              <h3>{actualPage.name}</h3>
               <h5>
-                $ {currentPage.price}
-                <span>$ {currentPage.previousPrice}</span>
+                $ {actualPage.price}
+                <span>$ {actualPage.previousPrice}</span>
               </h5>
               <p>
                 <StoreIcon />
-                In store: {currentPage.available && "available"}
+                In store: {actualPage.available && "available"}
               </p>
               <p>
                 <LocalShippingIcon />
@@ -60,22 +66,22 @@ export default function SingleProduct(props) {
                 <InputQuantity
                   quantity={quantityProduct}
                   setQuantity={setQuantityProduct}
-                  disabled={currentPage.inCart}
-                  maxAvailableProduct={currentPage.available}
+                  disabled={actualPage.inCart}
+                  maxAvailableProduct={actualPage.available}
                   addWithoutButton={false}
                 />
                 <Button
-                  name={currentPage.inCart ? "In Card" : "Add to cart"}
+                  name={actualPage.inCart ? "In Card" : "Add to cart"}
                   type="submit"
-                  disabled={currentPage.inCart}
+                  disabled={actualPage.inCart}
                 />
               </form>
             </div>
           </div>
-          <TabPanel product={currentPage} />
+          <TabPanel product={actualPage} />
         </>
       ) : (
-        <p>Site is no available</p>
+        <p>Site is no available, please refresh </p>
       )}
     </div>
   );

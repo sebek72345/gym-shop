@@ -1,8 +1,9 @@
 import React from "react";
-import CountDown from "./CountDown/CountDown";
-import "./DailyPromotion.scss";
-import gymSetIcon from "../../../assets/gymset.png";
+
 import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
+import "./DailyPromotion.scss";
+import CountDown from "./CountDown/CountDown";
+import gymSetIcon from "../../../assets/gymset.png";
 
 export default function DailyPromotion() {
   return (
@@ -30,7 +31,9 @@ export default function DailyPromotion() {
           </h3>
         </div>
         <div className="daily-promotion-button-wrapper">
-          <button className="daily-promotion-button">Check promotion</button>
+          <button type="button" className="daily-promotion-button">
+            Check promotion
+          </button>
           <ArrowRightAltIcon className="daily-promotion-button-arrow" />
         </div>
       </div>

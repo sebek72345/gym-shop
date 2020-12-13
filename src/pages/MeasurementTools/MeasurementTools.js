@@ -3,24 +3,21 @@ import { ProductContext } from "../../context";
 import CategoryTitle from "../../components/accesoriesComponent/CategoryTitle/CategoryTitle";
 import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
-export default function Mats(props) {
+
+export default function Mats({ match: { path } }) {
   const category = "measurement";
   const {
     productsCategory,
     getProductCategory,
     capitalize,
-    setFilterBrands,
-    setFilterPrice,
     getBrand,
     setCurrentCategory,
   } = useContext(ProductContext);
-  let [nameBrands, setNameBrands] = useState();
+  const [nameBrands, setNameBrands] = useState();
 
   useEffect(() => {
     (() => {
       setCurrentCategory(category);
-      setFilterBrands({});
-      setFilterPrice({});
       if (category) {
         getProductCategory(category);
         const temp = getProductCategory(category);
@@ -29,7 +26,7 @@ export default function Mats(props) {
     })();
   }, [category]);
 
-  const categoryTitle = capitalize(props.match.path.slice(1));
+  const categoryTitle = capitalize(path.slice(1));
 
   return (
     <div>

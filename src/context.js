@@ -5,13 +5,13 @@ export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [productsCategory, setProductCategory] = useState();
-  const [sortedProducts, setSortedProducts] = useState([]);
   const [products, setProducts] = useState();
   const [actualPage, setActualPage] = useState();
   const [productsInCart, setProductsInCart] = useState([]);
   const [filterBrands, setFilterBrands] = useState();
   const [filterPrice, setFilterPrice] = useState();
   const [currentCategory, setCurrentCategory] = useState();
+
   useEffect(() => {
     setProducts(data);
     return () => setProducts([]);
@@ -19,7 +19,7 @@ const ProductContextProvider = ({ children }) => {
 
   useEffect(() => {
     componentFilter(currentCategory);
-  }, [filterBrands, filterPrice]);
+  }, [filterBrands, filterPrice, currentCategory]);
   function getProductCategory(category) {
     const productFromCategory = data.filter(
       (product) => product.type === category
@@ -43,71 +43,67 @@ const ProductContextProvider = ({ children }) => {
     tempAllProd.map((prod) => {
       if (prod.slug === name) {
         return temp;
-      } else return prod;
+      }
+      return prod;
     });
+    let numberItemInCard = productsInCart ? productsInCart.length : 0;
+    document.title = `Gym shop (${++numberItemInCard})`;
     setProductsInCart([temp, ...productsInCart]);
     setProducts(tempAllProd);
-    window.localStorage.setItem(
-      "inCart",
-      JSON.stringify([temp, ...productsInCart])
-    );
   };
   const removeItemFromCart = (name) => {
-    const temp = productsInCart.filter((product) => product.slug !== name);
-
-    const tempAllProd = products;
-    tempAllProd.map((prod) => {
+    const newProductsInCart = productsInCart.filter(
+      (product) => product.slug !== name
+    );
+    const tempAllProd = products.map((prod) => {
       if (prod.slug === name) {
         prod.inCart = false;
         prod.amountInCart = 0;
       }
+      return prod;
+    });
+    setProducts(tempAllProd);
+    setProductsInCart(newProductsInCart);
+  };
+  const changeProductInCart = (name, action) => {
+    const temp = getProduct(name);
+    if (action === -1 && temp.amountInCart === 0)
+      return removeItemFromCart(name);
+    if (action === 1 && temp.available <= temp.amountInCart) {
+      return null;
+    }
+    const newProductsInCart = productsInCart.map((product) => {
+      if (product.slug === name) {
+        product.amountInCart += action;
+      }
+      return product;
     });
 
-    setProducts(tempAllProd);
-    setProductsInCart(temp);
+    setProductsInCart([...newProductsInCart]);
+    return null;
   };
-
   const increaseProductInCart = (name) => {
     changeProductInCart(name, 1);
   };
   const decreaseProductInCart = (name) => {
     changeProductInCart(name, -1);
   };
-  const changeProductInCart = (name, action) => {
-    const temp = getProduct(name);
-    if (action === -1 && temp.amountInCart === 0)
-      return removeItemFromCart(name);
-    if (action === 1 && temp.available <= temp.amountInCart) return;
-    console.log(temp.amountInCart);
-    temp.amountInCart += action;
-    console.log(temp);
-    console.log((temp.amountInCart += action));
-    const arrayCart = productsInCart.map((product) => {
-      if (product.slug === name) {
-        return (product = temp);
-      } else return product;
-    });
 
-    setProductsInCart([...arrayCart]);
-  };
-  const filterByPrice = (min, max, category) => {
+  const filterByPrice = (min, max) => {
     setFilterPrice([min, max]);
   };
 
-  const useFiltersBrand = (brand, category) => {
+  const filterByBrand = (brand) => {
     setFilterBrands(brand);
   };
   const componentFilter = (category) => {
     let filteredProduct;
     filteredProduct = getProductCategory(category);
-    console.log(filteredProduct);
-    console.log({ filterBrands, filterPrice });
     if (filterBrands) {
       filteredProduct = filteredProduct.filter(
         (prod) => prod.brand === filterBrands
       );
     }
-    console.log(filteredProduct);
     if (filterPrice) {
       filteredProduct = filteredProduct.filter((prod) => {
         if (
@@ -116,9 +112,9 @@ const ProductContextProvider = ({ children }) => {
         ) {
           return prod;
         }
+        return null;
       });
     }
-    console.log(filteredProduct);
     setProductCategory(filteredProduct);
   };
   const useFilters = (filterName) => {
@@ -171,20 +167,20 @@ const ProductContextProvider = ({ children }) => {
     setProductCategory(tempProd);
     return productsCategory;
   };
-  const resetFilters = (category) => {
-    setFilterBrands({});
-    setFilterPrice({});
+  const resetFilters = () => {
+    setFilterBrands();
+    setFilterPrice();
     [...document.querySelectorAll("input[name='filter-value']")].forEach(
       (input) => (input.checked = false)
     );
     [...document.querySelectorAll("input[name='brandRadio']")].forEach(
       (input) => (input.checked = false)
     );
-    getProductCategory(category);
+    getProductCategory(currentCategory);
   };
-  const getBrand = (productsCategory) => {
-    let nameBrands = productsCategory
-      ? productsCategory.map((prod) => prod.brand)
+  const getBrand = (productsInCategory) => {
+    let nameBrands = productsInCategory
+      ? productsInCategory.map((prod) => prod.brand)
       : null;
     nameBrands = [...new Set(nameBrands)];
     return nameBrands;
@@ -201,11 +197,6 @@ const ProductContextProvider = ({ children }) => {
       value={{
         currentCategory,
         setCurrentCategory,
-        filterBrands,
-        filterPrice,
-        setFilterBrands,
-        setFilterPrice,
-        sortedProducts,
         filterByPrice,
         decreaseProductInCart,
         actualPage,
@@ -218,10 +209,9 @@ const ProductContextProvider = ({ children }) => {
         removeItemFromCart,
         addProductToCart,
         increaseProductInCart,
-        products,
         useFilters,
         getBrand,
-        useFiltersBrand,
+        filterByBrand,
         resetFilters,
       }}
     >

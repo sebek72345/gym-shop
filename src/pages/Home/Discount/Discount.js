@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Discount.scss";
 import Button from "../../../components/Button/Button";
 import firebaseApp from "../../../firebase/initialization";
-import admin from "firebase-admin";
+
 export default function Discount() {
   const [inputValue, setInputValue] = useState("");
   const updateNewsletterList = async (e) => {
@@ -36,8 +36,8 @@ export default function Discount() {
           Do you want to receive a extra 5% discount ?
         </h2>
         <span className="discount-description-span">
-          It's so simple! All you need to do, is to sing to our newsletter and
-          get 5% off to your next order!{" "}
+          It is so simple! All you need to do, is to sing to our newsletter and
+          get 5% off to your next order!
         </span>
       </div>
       <form className="discount-form" onSubmit={updateNewsletterList}>

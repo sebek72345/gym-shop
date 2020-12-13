@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
-import Cart from "./Cart/Cart";
-import logo from "../../assets/mainLogo .png";
+import { Link, NavLink } from "react-router-dom";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
+import Cart from "./Cart/Cart";
+import logo from "../../assets/mainLogo .png";
+
 import "./Header.scss";
-import { Link, NavLink } from "react-router-dom";
+
 import { routes } from "../../routes";
 import firebaseApp from "../../firebase/initialization";
+
 export default function Header() {
   const [isLoged, setIsLoged] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  useEffect(() => {
+  /*  useEffect(() => {
     firebaseApp.auth().onAuthStateChanged(function (user) {
       if (user) {
         setIsLoged(true);
-        /* setCurrentUser(user); */
+        setCurrentUser(user);
       } else {
         setIsLoged(false);
-        /* setCurrentUser(null); */
+        setCurrentUser(null);
       }
     });
-  });
+  }); */
 
   return (
     <div className="header">

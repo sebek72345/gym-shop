@@ -3,7 +3,8 @@ import { ProductContext } from "../../context";
 import CategoryTitle from "../../components/accesoriesComponent/CategoryTitle/CategoryTitle";
 import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
-export default function Mats(props) {
+
+export default function Hygiene({ match: { path } }) {
   const category = "hygiene";
   const {
     productsCategory,
@@ -24,7 +25,7 @@ export default function Mats(props) {
     })();
   }, [category]);
 
-  const categoryTitle = capitalize(props.match.path.slice(1));
+  const categoryTitle = capitalize(path.slice(1));
   return (
     <div>
       <CategoryTitle title={categoryTitle} />

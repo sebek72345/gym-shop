@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./FeaturedProducts.scss";
 import Card from "../../../components/Card/Card";
 import { ProductContext } from "../../../context";
+
 export default function FeaturedProduct() {
   const { getFeaturedProducts } = useContext(ProductContext);
   const featured = getFeaturedProducts();

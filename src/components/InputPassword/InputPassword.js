@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import "./InputPassword.scss";
+
 export default function InputPassword({ values, handleBlur, handleChange }) {
   const [visablePassword, setVisablePassword] = useState(false);
   return (

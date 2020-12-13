@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -8,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Tabele from "../Tabele/Tabele";
 import DescriptionProduct from "../DescriptionProduct/DescriptionProduct";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -26,12 +26,6 @@ function TabPanel(props) {
     </div>
   );
 }
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
 
 function a11yProps(index) {
   return {
@@ -72,7 +66,7 @@ export default function SimpleTabs({ product }) {
           <Tab label="Product Details" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0} component={"span"}>
+      <TabPanel value={value} index={0} component="span">
         <DescriptionProduct details={product.details} />
       </TabPanel>
       <TabPanel value={value} index={1}>

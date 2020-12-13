@@ -1,25 +1,34 @@
 import React, { useContext } from "react";
 import "./Filters.scss";
-import Button from "./../../Button/Button";
+import Button from "../../Button/Button";
 import { ProductContext } from "../../../context";
+
 export default function Filters({ brands, category }) {
-  const renderBrandsRadio = () => {
-    return brands.map((brand) => (
+  const renderBrandsRadio = () =>
+    brands.map((brand) => (
       <label>
         <input type="radio" name="brandRadio" value={brand} />
         {brand}
       </label>
     ));
-  };
-  const { filterByPrice, useFiltersBrand } = useContext(ProductContext);
+
+  const { filterByPrice, filterByBrand } = useContext(ProductContext);
   const setFiltersPrice = (e) => {
-    const min = e.target.dataset.min;
-    const max = e.target.dataset.max;
-    filterByPrice(min, max, category);
+    const {
+      target: {
+        dataset: { min, max },
+      },
+    } = e;
+    const minValue = min;
+    const maxValue = max;
+    filterByPrice(minValue, maxValue);
   };
   const SetFiltersBrand = (e) => {
-    const value = e.target.value;
-    useFiltersBrand(value, category);
+    const {
+      target: { value },
+    } = e;
+    const valueClickedFilter = value;
+    filterByBrand(valueClickedFilter);
   };
 
   return (

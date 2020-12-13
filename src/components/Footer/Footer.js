@@ -1,7 +1,8 @@
 import React from "react";
-import "./Footer.scss";
 import { Link } from "react-router-dom";
+import "./Footer.scss";
 import { routes } from "../../routes";
+
 export default function Footer() {
   return (
     <div className="footer-wrapper">

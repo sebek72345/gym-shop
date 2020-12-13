@@ -1,3 +1,4 @@
+import { Route, Switch } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Contact from "./pages/Contact/Contact";
 import Login from "./pages/Login/Login";
@@ -12,10 +13,9 @@ import Hygiene from "./pages/Hygiene/Hygiene";
 import MeasurementTools from "./pages/MeasurementTools/MeasurementTools";
 import MainWrapper from "./components/MainWrapper/MainWrapper";
 import CartPage from "./pages/CartPage/CartPage";
-import { Route, Switch } from "react-router-dom";
 import { routes } from "./routes";
+
 function App() {
-  console.log(routes.home);
   return (
     <>
       <Header />
@@ -26,15 +26,10 @@ function App() {
           <Route
             path={routes.machineAttachments}
             component={MachineAttachments}
-            exact
           />
           <Route path={routes.hygiene} component={Hygiene} exact />
-          <Route
-            path={routes.measurmentTools}
-            component={MeasurementTools}
-            exact
-          />
-          <Route path="/products/:slug" exact component={SingleProduct}></Route>
+          <Route path={routes.measurmentTools} component={MeasurementTools} />
+          <Route path="/products/:slug" component={SingleProduct} />
           <Route path={routes.contact} component={Contact} />
           <Route path={routes.login} component={Login} />
           <Route path={routes.signUp} component={SignUp} />

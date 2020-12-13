@@ -5,7 +5,7 @@ import "./CartPage.scss";
 import { ProductContext } from "../../context";
 import Summary from "../../components/Summary/Summary";
 import ProductInCart from "../../components/ProductInCart/ProductInCart";
-import Button from "../../components/Button/Button";
+
 export default function CartPage() {
   const { productsInCart } = useContext(ProductContext);
   console.log();

@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import Button from "../../components/Button/Button";
-import { Link } from "react-router-dom";
-import { Form } from "formik";
-import firebaseApp from "../../firebase/initialization";
-import InputPassword from "../../components/InputPassword/InputPassword";
-import { withFormik } from "formik";
-import loginImage from "../../assets/login.png";
+import React from "react";
+import { useHistory, Link } from "react-router-dom";
 import * as yup from "yup";
-import { routes } from "../../routes";
-import "./Login.scss";
+import { Form, withFormik } from "formik";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import Button from "../../components/Button/Button";
+import firebaseApp from "../../firebase/initialization";
+import InputPassword from "../../components/InputPassword/InputPassword";
+import loginImage from "../../assets/login.png";
+import { routes } from "../../routes";
+import "./Login.scss";
 
 const LoginForm = (props) => {
   const {
@@ -80,11 +78,11 @@ const LoginFormEnhanced = withFormik({
       })
       .then(() => {
         NotificationManager.success("Success message", "Login success");
-        let history = useHistory();
+        const history = useHistory();
         history.push("/");
         resetForm();
       })
-      .catch((err) => NotificationManager.error("Error: " + err));
+      .catch((err) => NotificationManager.error(`Error:  + ${err}`));
   },
   validationSchema: LoginValidation,
 })(LoginForm);

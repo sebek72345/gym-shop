@@ -8,7 +8,7 @@ const StyledLi = styled.li`
   padding: 10px;
   border: 1px solid #ccc;
   list-style: none;
-  width: 50%;
+  width: 100%;
 `;
 const StyledH2 = styled.h2`
   font-size: 32px;

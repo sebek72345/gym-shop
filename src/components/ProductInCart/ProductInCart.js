@@ -5,7 +5,12 @@ import { ProductContext } from "../../context";
 import InputQuantity from "../InputQuantity/InputQuantity";
 import "./ProductInCart.scss";
 
-export default function ProductInCart({ product }) {
+export default function ProductInCart({
+  product,
+  small,
+  setVisabilityModal,
+  visabilityModal,
+}) {
   const { name, price, pics, slug, available, amountInCart } = product;
   const { removeItemFromCart } = useContext(ProductContext);
   const totalPriceForOneItem = price * amountInCart;
@@ -13,23 +18,31 @@ export default function ProductInCart({ product }) {
   const [quantity, setQuantity] = useState(amountInCart);
   return (
     <div className="summary-basket">
-      <div className="summary-image">
-        <Link to={`products/${slug}`}>
+      <div
+        className="summary-image"
+        onClick={() => setVisabilityModal(!visabilityModal)}
+        onKeyDown={() => setVisabilityModal(!visabilityModal)}
+        role="button"
+        tabIndex={0}
+      >
+        <Link to={`/products/${slug}`}>
           <img src={pics[0]} alt="product" />
         </Link>
       </div>
       <div className="product-details">
         <p className="product-title">{name}</p>
-        <p>
-          Quantity:
-          <InputQuantity
-            quantity={quantity}
-            setQuantity={setQuantity}
-            addWithoutButton
-            maxAvailableProduct={available}
-            name={slug}
-          />
-        </p>
+        {small || (
+          <p>
+            Quantity:
+            <InputQuantity
+              quantity={quantity}
+              setQuantity={setQuantity}
+              addWithoutButton
+              maxAvailableProduct={available}
+              name={slug}
+            />
+          </p>
+        )}
       </div>
       <div className="product-action">
         <div className="product-action-price">

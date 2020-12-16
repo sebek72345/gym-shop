@@ -31,7 +31,7 @@ export default function CountDown() {
     return () => clearInterval(interval);
   }, [seconds, minutes, hours]);
 
-  const addLeadingZero = (number) => (number < 10 ? `0 ${number}` : number);
+  const addLeadingZero = (number) => (number < 10 ? `0${number}` : number);
   const style = {
     textAlign: "center",
     fontWeight: "bold",

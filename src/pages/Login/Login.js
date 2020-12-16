@@ -1,7 +1,7 @@
 import React from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
-import { Form, withFormik } from "formik";
+import { Form, Formik, Field } from "formik";
 import {
   NotificationContainer,
   NotificationManager,
@@ -14,77 +14,77 @@ import loginImage from "../../assets/login.png";
 import { routes } from "../../routes";
 import "./Login.scss";
 
-const LoginForm = (props) => {
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-  } = props;
-
-  return (
-    <>
-      <div className="login-wrapper">
-        <Form onSubmit={handleSubmit} className="login">
-          <h2>Sign In</h2>
-          <input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-            className="input-form"
-            placeholder="email"
-          />
-          <span name="email" className="login-error">
-            {touched.email ? errors.email : null}
-          </span>
-          <InputPassword values handleBlur handleChange />
-
-          <span name="email" className="login-error">
-            {touched.password ? errors.password : null}
-          </span>
-
-          {<Button name="Login" className="login-btn" type="submit" />}
-          {/* <button type="submit">Login</button> */}
-          <Link to={routes.signUp} className="form-outerLink">
-            <span>Sign Up</span>
-          </Link>
-        </Form>
-        <div className="login-image-wrapper">
-          <img src={loginImage} alt="login" className="login-image" />
-        </div>
-      </div>
-      <NotificationContainer />
-    </>
-  );
-};
-
 const LoginValidation = yup.object().shape({
   email: yup.string().email("Invalid email").required("Enter email"),
   password: yup.string().min(4).max(16).required(),
 });
 
-const LoginFormEnhanced = withFormik({
-  handleSubmit: (values, { resetForm }) => {
-    console.log("s");
-    firebaseApp
-      .auth()
-      .signInWithEmailAndPassword(values.email, values.password)
-      .then((user) => {
-        console.log(user);
-      })
-      .then(() => {
-        NotificationManager.success("Success message", "Login success");
-        const history = useHistory();
-        history.push("/");
-        resetForm();
-      })
-      .catch((err) => NotificationManager.error(`Error:  + ${err}`));
-  },
-  validationSchema: LoginValidation,
-})(LoginForm);
+export default function SignUp({ history }) {
+  return (
+    <Formik
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+      validationSchema={LoginValidation}
+      onSubmit={(values, { resetForm }) => {
+        firebaseApp
+          .auth()
+          .signInWithEmailAndPassword(values.email, values.password)
+          .then((user) => {
+            console.log(user.data());
+          })
+          .then(() => {
+            NotificationManager.success("Success message", "Login success");
+            history.push("/");
+            resetForm();
+          })
+          .catch((err) => {
+            NotificationManager.error(`${err}`);
+            resetForm();
+          });
+      }}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting,
+      }) => (
+        <div className="register-wrapper">
+          <Form onSubmit={handleSubmit} className="register">
+            <h2>Sign Up</h2>
 
-export default LoginFormEnhanced;
+            <Field
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="Email"
+              className="input-form"
+            />
+
+            <InputPassword
+              name="password"
+              values={values.password}
+              handleBlur={handleBlur}
+              handleChange={handleChange}
+            />
+
+            <Button name="Sign Up" type="submit" />
+            <Link to={routes.login} className="form-outerLink">
+              <span>Login</span>
+            </Link>
+          </Form>
+          <div className="register-image-wrapper">
+            <img src={loginImage} alt="register" className="register-image" />
+          </div>
+          <NotificationContainer />
+        </div>
+      )}
+    </Formik>
+  );
+}

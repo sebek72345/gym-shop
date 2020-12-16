@@ -1,29 +1,72 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import EmailIcon from "@material-ui/icons/Email";
 import PhoneIcon from "@material-ui/icons/Phone";
+import MenuIcon from "@material-ui/icons/Menu";
 import Cart from "./Cart/Cart";
 import logo from "../../assets/mainLogo .png";
-
 import "./Header.scss";
-
 import { routes } from "../../routes";
 import firebaseApp from "../../firebase/initialization";
+import { ProductContext } from "../../context";
 
-export default function Header() {
+const GenerateCategory = ({ big }) => {
+  const dateToGenerateLi = [
+    { route: routes.mats, name: "mats" },
+    { route: routes.machineAttachments, name: "machine attachments" },
+    { route: routes.hygiene, name: "hygiene" },
+    { route: routes.measurmentTools, name: "measurement tools" },
+  ];
+  return (
+    <ul className={big ? "assortment-list" : "assortment-list--small"}>
+      {dateToGenerateLi.map((li) => (
+        <li key={li.name}>
+          <NavLink to={li.route} activeClassName="active-link">
+            {li.name}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  );
+};
+function Header() {
+  const { currentUser, setCurrentUser, setProductsInCart } = useContext(
+    ProductContext
+  );
   const [isLoged, setIsLoged] = useState(false);
-  /*  useEffect(() => {
-    firebaseApp.auth().onAuthStateChanged(function (user) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    firebaseApp.auth().onAuthStateChanged((user) => {
       if (user) {
-        setIsLoged(true);
-        setCurrentUser(user);
-      } else {
-        setIsLoged(false);
-        setCurrentUser(null);
+        firebaseApp
+          .firestore()
+          .collection("userData")
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              console.log("Document data:", doc.data());
+              setIsLoged(true);
+              setCurrentUser(doc.data().login);
+            } else {
+              setIsLoged(false);
+              setCurrentUser(null);
+            }
+          });
       }
     });
-  }); */
+  }, []);
 
+  const toggleModal = (e) => {
+    const modal = document.querySelector(".modal");
+    if (modalIsOpen) {
+      modal.style.transform = "translateX(0)";
+    } else {
+      modal.style.transform = "translateX(100%)";
+    }
+    setModalIsOpen(!modalIsOpen);
+  };
   return (
     <div className="header">
       <div className="header-container">
@@ -46,13 +89,22 @@ export default function Header() {
             </address>
           </div>
           {isLoged ? (
-            <Link
-              to={routes.login}
-              className="header-login"
-              onClick={() => firebaseApp.auth().signOut()}
-            >
-              Sign Out
-            </Link>
+            <>
+              <Link
+                to={routes.login}
+                className="header-login"
+                onClick={() => {
+                  firebaseApp.auth().signOut();
+                  setProductsInCart([]);
+                }}
+              >
+                Sign Out
+              </Link>
+              <div className="data-user">
+                <p>You`re loged as: </p>
+                <span>{currentUser}</span>
+              </div>
+            </>
           ) : (
             <>
               <Link to={routes.login} className="header-login">
@@ -65,35 +117,24 @@ export default function Header() {
           )}
 
           <Cart />
+          <MenuIcon onClick={toggleModal} className="hamburger" />
         </div>
       </div>
+      <div
+        className="modal"
+        onClick={toggleModal}
+        onKeyDown={toggleModal}
+        role="button"
+        tabIndex={0}
+      >
+        <GenerateCategory />
+      </div>
       <div className="assortment">
-        <ul className="assortment-list">
-          <li>
-            <NavLink to={routes.mats} activeClassName="active-link">
-              mats
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={routes.machineAttachments}
-              activeClassName="active-link"
-            >
-              machine attachments
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={routes.hygiene} activeClassName="active-link">
-              hygiene
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={routes.measurmentTools} activeClassName="active-link">
-              measurement tools
-            </NavLink>
-          </li>
-        </ul>
+        <GenerateCategory big />
       </div>
     </div>
   );
 }
+
+const MemorizedHeader = React.memo(Header);
+export default MemorizedHeader;

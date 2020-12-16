@@ -2,10 +2,13 @@
   background-color: rgb(52, 58, 64);
   padding: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  height: 150px;
   .footer {
     width: 80%;
-    font-size: 16px;
+    font-size: 20px;
+    margin: 0 auto;
     &-links {
       display: flex;
       padding-bottom: 32px;
@@ -14,6 +17,7 @@
         list-style: none;
         color: #ddd;
         margin: 0 10px;
+        text-align: center;
         &:hover {
           color: rgb(192, 187, 187);
         }
@@ -24,6 +28,18 @@
       justify-content: flex-end;
       margin-top: 15px;
       color: #ddd;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .footer-wrapper {
+    height: auto;
+    .footer {
+      width: 100%;
+      &-links {
+        flex-direction: column;
+        align-content: space-around;
+      }
     }
   }
 }

@@ -26,9 +26,6 @@ const useStyles = makeStyles({
   media: {
     height: 180,
     backgroundSize: "contain",
-    /* backgroundImage: `url(
-      "https://store.bbcomcdn.com/images/store/skuimage/sku_MMEDS520164/image_skuMMEDS520164_largeImage_X_130_white.jpg"
-    )`, */
     margin: "5px 0",
   },
 });
@@ -41,7 +38,6 @@ export default function CustomCard({
   slug,
 }) {
   const classes = useStyles();
-
   return (
     <Link to={`/products/${slug}`}>
       <Card className={classes.root}>

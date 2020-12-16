@@ -19,10 +19,9 @@ export default function SingleProduct({
   const [quantityProduct, setQuantityProduct] = useState(1);
   const titlePage = slug;
   useEffect(() => {
-    const currentPage = getProduct(titlePage);
-    const initalAmount = currentPage.amountInCart
-      ? currentPage.amountInCart
-      : 1;
+    getProduct(titlePage);
+    const initalAmount =
+      actualPage && actualPage.amountInCart ? actualPage.amountInCart : 1;
     setQuantityProduct(initalAmount);
   }, [titlePage]);
 
@@ -51,7 +50,8 @@ export default function SingleProduct({
               </h5>
               <p>
                 <StoreIcon />
-                In store: {actualPage.available && "available"}
+                In store:
+                {actualPage.available ? "available" : " not available"}
               </p>
               <p>
                 <LocalShippingIcon />

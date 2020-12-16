@@ -1,10 +1,10 @@
 .filters-wrapper {
   min-width: 200px;
-  height: 500px;
   background-color: "red";
   box-shadow: 4px 4px 4px 3px rgb(207, 207, 207);
   border-radius: 5px;
   padding: 26px 20px;
+
   .filters-title {
     font-size: 24px;
     font-weight: 500;
@@ -25,6 +25,19 @@
     text-transform: uppercase;
     input {
       margin-right: 5px;
+    }
+  }
+}
+@media (max-width: 900px) {
+  .filters-wrapper {
+    display: flex;
+    flex-direction: column;
+    .main-filters {
+      display: flex;
+      justify-content: space-around;
+      .filters-by-brand {
+        border: none;
+      }
     }
   }
 }

@@ -3,6 +3,7 @@ import { ProductContext } from "../../context";
 import CategoryTitle from "../../components/accesoriesComponent/CategoryTitle/CategoryTitle";
 import Filters from "../../components/accesoriesComponent/Filters/Filters";
 import ProductWrapper from "../../components/accesoriesComponent/ProductWrapper/ProductWrapper";
+import "./Mats.scss";
 
 export default function Mats({ match: { path } }) {
   const category = "mats";
@@ -28,7 +29,7 @@ export default function Mats({ match: { path } }) {
   return (
     <div>
       <CategoryTitle title={categoryTitle} />
-      <div style={{ display: "flex" }}>
+      <div className="category-wrapper">
         {nameBrands && <Filters category={category} brands={nameBrands} />}
         {productsCategory && <ProductWrapper products={productsCategory} />}
       </div>

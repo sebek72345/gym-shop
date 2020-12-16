@@ -1,0 +1,8 @@
+.category-wrapper {
+  display: flex;
+}
+@media (max-width: 900px) {
+  .category-wrapper {
+    flex-direction: column;
+  }
+}

@@ -4,7 +4,7 @@ export const routes = {
   signUp: "/signup",
   login: "/login",
   contact: "/contact",
-  deliver: "/deliverMethods",
+  deliver: "/deliveryMethods",
   termsConditions: "/terms&conditions",
   aboutUs: "/aboutUs",
   mats: "/mats",

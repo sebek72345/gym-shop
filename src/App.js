@@ -13,6 +13,7 @@ import Hygiene from "./pages/Hygiene/Hygiene";
 import MeasurementTools from "./pages/MeasurementTools/MeasurementTools";
 import MainWrapper from "./components/MainWrapper/MainWrapper";
 import CartPage from "./pages/CartPage/CartPage";
+import AboutUs from "./pages/AboutUs/AboutUs";
 import { routes } from "./routes";
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
           <Route path={routes.login} component={Login} />
           <Route path={routes.signUp} component={SignUp} />
           <Route path={routes.cart} component={CartPage} />
+          <Route path={routes.aboutUs} component={AboutUs} />
+          <Route path={routes.deliver} component={AboutUs} />
+          <Route path={routes.termsConditions} component={AboutUs} />
           <Route component={NotFound} />
         </Switch>
       </MainWrapper>

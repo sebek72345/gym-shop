@@ -13,7 +13,7 @@ export default function ProductWrapper({ products }) {
   return (
     <main className="product-container">
       <div className="sorting-container">
-        <p className="category product-counter">
+        <p className="products-counter">
           found {products.length} products in this catergory
         </p>
         <SortBy optionValue={optionValue} setOptionValue={setOptionValue} />
@@ -30,7 +30,7 @@ export default function ProductWrapper({ products }) {
                 key={product.id}
               />
             ))
-          : "Coś poszło nie tak"}
+          : "Something went wrong"}
       </div>
     </main>
   );

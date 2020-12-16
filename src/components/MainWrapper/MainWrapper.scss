@@ -1,7 +1,13 @@
 .main-wrapper {
   width: 90%;
-  max-width: 1200px;
-  margin: 100px auto 0 auto;
+  min-height: calc(100vh - 300px);
+  margin: 0 auto;
   padding-bottom: 30px;
+  margin-top: 40px;
   background-color: rgb(253, 253, 253);
+}
+@media (max-width: 900px) {
+  .main-wrapper {
+    min-height: calc(100vh - 250px);
+  }
 }

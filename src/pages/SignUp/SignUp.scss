@@ -33,10 +33,24 @@
     }
   }
   .register-image-wrapper {
-    max-width: 50%;
+    width: 50%;
+
     .register-image {
       width: 100%;
       height: 100%;
     }
+  }
+}
+@media (max-width: 850px) {
+  .register-wrapper {
+    width: 70%;
+    .register-image-wrapper {
+      display: none;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .register-wrapper {
+    width: 90%;
   }
 }

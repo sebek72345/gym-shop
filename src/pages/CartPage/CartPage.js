@@ -6,20 +6,37 @@ import { ProductContext } from "../../context";
 import Summary from "../../components/Summary/Summary";
 import ProductInCart from "../../components/ProductInCart/ProductInCart";
 
+export const ProductsInCartRender = ({
+  small,
+  visabilityModal,
+  setVisabilityModal,
+}) => {
+  const { productsInCart } = useContext(ProductContext);
+  return (
+    <div className="products-in-cart">
+      {productsInCart.map((product) => (
+        <ProductInCart
+          key={product.id}
+          product={product}
+          small={small}
+          visabilityModal={visabilityModal}
+          setVisabilityModal={setVisabilityModal}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default function CartPage() {
   const { productsInCart } = useContext(ProductContext);
-  console.log();
+
   return (
     <div className="cart-page-wrapper">
       {productsInCart.length ? (
         <>
           <h3 className="cart-page-title">Shopping cart contents:</h3>
           <div className="products">
-            <div className="products-in-cart">
-              {productsInCart.map((product) => (
-                <ProductInCart key={product.id} product={product} />
-              ))}
-            </div>
+            <ProductsInCartRender />
 
             <Summary />
           </div>

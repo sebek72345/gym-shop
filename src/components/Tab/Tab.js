@@ -56,6 +56,7 @@ export default function SimpleTabs({ product }) {
           value={value}
           onChange={handleChange}
           aria-label="simple tabs example"
+          TabIndicatorProps={{ style: { backgroundColor: "#000dc0" } }}
           style={{
             backgroundColor: "white",
             color: "black",

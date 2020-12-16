@@ -17,6 +17,10 @@
   .product-details {
     display: flex;
     flex-direction: column;
+
+    .product-title + p {
+      font-size: 12px;
+    }
   }
   .product-action {
     display: flex;
@@ -26,6 +30,14 @@
     max-width: 120px;
     &-one {
       font-size: 12px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .summary-basket {
+    flex-direction: column;
+    .product-details {
+      align-items: center;
     }
   }
 }

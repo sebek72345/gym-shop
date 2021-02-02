@@ -1,10 +1,12 @@
 ## This is online shop, where you can buy a equipment to gym.
-# You can filter
-# You can add to cart
+It was created to practice REACT and new technologies
+ 
+ 
+ LIVE: https://sebek72345.github.io/
 
 
 ##STACK
-REACT
+REACT, REACT HOOKS, REACT CONTEXT
 FIREBASE
 EMAIL JS
 FORMIK, YUP

@@ -28,7 +28,7 @@ export default function Contact() {
               email: "",
               message: "",
             }}
-            onSubmit={(values) => {
+            onSubmit={(values, { resetForm }) => {
               const templateParams = {
                 name: values.name,
                 email: values.email,
@@ -47,7 +47,7 @@ export default function Contact() {
                     "Success message",
                     "Message was send"
                   );
-                  console.log(resp);
+                  resetForm();
                 })
                 .catch((err) => {
                   NotificationManager.error("Error message", err, 3000, () => {

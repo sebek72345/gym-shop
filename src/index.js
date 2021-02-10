@@ -7,7 +7,7 @@ import ProductsProvider from "./context";
 
 ReactDOM.render(
   <ProductsProvider>
-    <Router>
+    <Router basename={window.location.pathname || ""}>
       <App />
     </Router>
   </ProductsProvider>,

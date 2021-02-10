@@ -70,7 +70,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header-container">
-        <Link to={routes.home}>
+        <Link to={process.env.PUBLIC_URL + routes.home}>
           <div className="logo-container">
             <img src={logo} alt="logo" className="logo" />
           </div>
@@ -107,10 +107,16 @@ function Header() {
             </>
           ) : (
             <>
-              <Link to={routes.login} className="header-login">
+              <Link
+                to={process.env.PUBLIC_URL + routes.login}
+                className="header-login"
+              >
                 Login
               </Link>
-              <Link to={routes.signUp} className="header-signup">
+              <Link
+                to={process.env.PUBLIC_URL + routes.signUp}
+                className="header-signup"
+              >
                 Sign Up
               </Link>
             </>

@@ -35,25 +35,7 @@ export default function Contact() {
                 content: values.message,
               };
 
-              emailjs
-                .send(
-                  "service_qhiee3g",
-                  "template_4sb8qbr",
-                  templateParams,
-                  "user_rKSxubFxTbH8A7cKq1w1S"
-                )
-                .then((resp) => {
-                  NotificationManager.success(
-                    "Success message",
-                    "Message was send"
-                  );
-                  resetForm();
-                })
-                .catch((err) => {
-                  NotificationManager.error("Error message", err, 3000, () => {
-                    alert("callback");
-                  });
-                });
+            
             }}
             validationSchema={yup.object().shape({
               name: yup.string().required("Name is required"),
